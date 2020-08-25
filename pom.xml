@@ -53,7 +53,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                ar.edu.itba.Sokoban
+                                ar.edu.itba.Main
                             </mainClass>
                         </manifest>
                     </archive>
@@ -65,7 +65,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>ar.edu.itba.Sokoban</mainClass>
+                    <mainClass>ar.edu.itba.Main</mainClass>
                 </configuration>
             </plugin>
             <plugin>
