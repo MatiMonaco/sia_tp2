@@ -16,39 +16,44 @@ public abstract class Character {
         this.equipmentList = equipmentList;
     }
 
+    public  double getRelativePerformance(List<Character> individuals){
+        double sum = individuals.stream().mapToDouble(Character::getPerformance).sum();
+        return getPerformance()/sum;
+    }
+
     private double getStrength(){
         if(equipmentList ==null){
             throw new NullPointerException();
         }
-        double sum =equipmentList.stream().mapToInt(Equipment::getStrength).sum();
+        double sum =equipmentList.stream().mapToDouble(Equipment::getStrength).sum();
         return 100*Math.tanh(0.01*sum);
     }
     private double getAgility(){
         if(equipmentList ==null){
             throw new NullPointerException();
         }
-        double sum = equipmentList.stream().mapToInt(Equipment::getAgility).sum();
+        double sum = equipmentList.stream().mapToDouble(Equipment::getAgility).sum();
         return Math.tanh(0.01*sum);
     }
     private double getProficiency(){
         if(equipmentList ==null){
             throw new NullPointerException();
         }
-        double sum= equipmentList.stream().mapToInt(Equipment::getProficiency).sum();
+        double sum= equipmentList.stream().mapToDouble(Equipment::getProficiency).sum();
         return 0.6*Math.tanh(0.01*sum);
     }
     private double getResistance(){
         if(equipmentList ==null){
             throw new NullPointerException();
         }
-        double sum = equipmentList.stream().mapToInt(Equipment::getResistance).sum();
+        double sum = equipmentList.stream().mapToDouble(Equipment::getResistance).sum();
         return Math.tanh(0.01*sum);
     }
     private double getHealth(){
         if(equipmentList ==null){
             throw new NullPointerException();
         }
-        double sum = equipmentList.stream().mapToInt(Equipment::getHealth).sum();
+        double sum = equipmentList.stream().mapToDouble(Equipment::getHealth).sum();
         return 100*Math.tanh(0.01*sum);
     }
 
