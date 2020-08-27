@@ -1,0 +1,8 @@
+{
+  "crossing":"one-point",
+  "mutation": "gen",
+  "selection": "elite",
+  "implementation": "fill-all",
+  "cut": "time"
+
+}

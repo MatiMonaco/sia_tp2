@@ -1,50 +1,98 @@
 package ar.edu.itba;
 
-import com.univocity.parsers.common.ParsingContext;
-import com.univocity.parsers.common.processor.ObjectRowProcessor;
-import com.univocity.parsers.conversions.Conversions;
-import com.univocity.parsers.tsv.TsvParser;
-import com.univocity.parsers.tsv.TsvParserSettings;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Arrays;
-
 public class Main {
 
-    public static void main(String[] args) {
-        Character warrior = new Character(Character.CharacterClass.WARRIOR);
+    public static void main(String[] args) throws InterruptedException {
 
-        System.out.println(warrior.type);
-        System.out.println(warrior.type.getBaseAttackM());
-        System.out.println(warrior.type.getBaseDefenseM());
+        JSONParser parser = new JSONParser();
+        String path = "./config.json";
 
-        TsvParserSettings settings = new TsvParserSettings();
+        try (Reader reader = new FileReader(path)) {
 
-        // all rows parsed from your input will be sent to this processor
-        ObjectRowProcessor rowProcessor = new ObjectRowProcessor() {
-            @Override
-            public void rowProcessed(Object[] row, ParsingContext context) {
-                //here is the row. Let's just print it.
-                System.out.println(Arrays.toString(row));
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            System.out.println(jsonObject);
+
+            String crossing = (String) jsonObject.get("crossing");
+            if(crossing == null){
+                System.out.println("Se debe especificar el cruce a utilizar");
             }
-        };
-// the ObjectRowProcessor supports conversions from String to whatever you need:
-// converts values in columns 2 and 5 to BigDecimal
-        rowProcessor.convertIndexes(Conversions.toBigDecimal()).set(2, 5);
+            String mutation = (String) jsonObject.get("mutation");
+            if(mutation == null){
+                System.out.println("Se debe especificar el mutación a utilizar");
+            }
+            String selection = (String) jsonObject.get("selection");
+            if(selection == null){
+                System.out.println("Se debe especificar la seleccion de padres y reemplazo de individuos a utilizar");
+            }
+            String implementation = (String) jsonObject.get("implementation");
+            if(implementation == null){
+                System.out.println("Se debe especificar la implementación a utilizar");
+            }
+            String cut = (String) jsonObject.get("cut");
+            if(cut == null){
+                System.out.println("Se debe especificar el criterio de corte a utilizar");
+            }
 
-// converts the values in columns "Description" and "Model". Applies trim and to lowercase to the values in these columns.
-        rowProcessor.convertFields(Conversions.trim(), Conversions.toLowerCase()).set("Description", "Model");
 
-//configures to use the RowProcessor
-        settings.setRowProcessor(rowProcessor);
-
-        TsvParser parser = new TsvParser(settings);
-//parses everything. All rows will be pumped into your RowProcessor.
-        try {
-            parser.parse(new FileReader("C:\\Users\\Ignacio Vazquez\\IdeaProjects\\sia_tp2\\src\\main\\Resources\\armas.tsv"));
-        } catch (FileNotFoundException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+        double phase = 0;
+        double[][] initdata = {{0},{1}};
+
+        int numCharts = 4;
+        List<XYChart> charts = new ArrayList<>();
+
+        for(int i = 0; i < numCharts;i++){
+            XYChart chart = new XYChartBuilder().xAxisTitle("Generation").yAxisTitle("Performance").width(600).height(400).build();
+            chart.getStyler().setYAxisMin((double) 0);
+            chart.addSeries(""+i, initdata[0],initdata[1]);
+            charts.add(chart);
+        }
+
+
+        SwingWrapper<XYChart> sw = new SwingWrapper<>(charts);
+
+        sw.displayChartMatrix();
+
+
+        double j = 0;
+       List<Double> dataX, dataY,data2Y;
+       dataX = new ArrayList<>();
+       dataY = new ArrayList<>();
+       data2Y = new ArrayList<>();
+        while (j < 100) {
+            dataX.add(j);
+            dataY.add(j);
+            data2Y.add(j/2);
+            Thread.sleep(50);
+
+            double[] x = new double[dataX.size()];
+            for (int i = 0; i < x.length; i++) {
+                x[i] = dataX.get(i).doubleValue();  // java 1.4 style
+                // or:
+                x[i] = dataX.get(i);                // java 1.5+ style (outboxing)
+            }
+            double[] y = new double[dataY.size()];
+            for (int i = 0; i < y.length; i++) {
+                y[i] = dataY.get(i).doubleValue();  // java 1.4 style
+                // or:
+                y[i] = dataY.get(i);                // java 1.5+ style (outboxing)
+            }
+
+            for(int i = 0; i< numCharts;i++){
+                charts.get(i).updateXYSeries(""+i, x,y, null);
+                sw.repaintChart(i);
+            }
+
+
+
+
+            j++;
+        }
+
+
+
     }
+
 }
