@@ -4,16 +4,20 @@ import ar.edu.itba.Equipment;
 
 import java.util.List;
 
-public abstract class Character {
+public class Character {
 
-   protected int height;
+   private final double height;
+   private final CharacterType type;
    protected List<Equipment> equipmentList;
 
-    public abstract double getPerformance();
-
-    public Character(int height, List<Equipment> equipmentList) {
+    public Character(int height, CharacterType type,List<Equipment> equipmentList) {
         this.height = height;
+        this.type = type;
         this.equipmentList = equipmentList;
+    }
+
+    public double getPerformance(){
+        return type.getBaseAttackM() * getAttack() + type.getBaseAttackM() * getDefense();
     }
 
     public  double getRelativePerformance(List<Character> individuals){
@@ -22,10 +26,10 @@ public abstract class Character {
     }
 
     private double getStrength(){
-        if(equipmentList ==null){
+        if(equipmentList == null){
             throw new NullPointerException();
         }
-        double sum =equipmentList.stream().mapToDouble(Equipment::getStrength).sum();
+        double sum = equipmentList.stream().mapToDouble(Equipment::getStrength).sum();
         return 100*Math.tanh(0.01*sum);
     }
     private double getAgility(){
@@ -60,6 +64,7 @@ public abstract class Character {
     private double getAttackModifier(){
         return 0.7-Math.pow(3*height-5,4) + Math.pow(3*height-5,5) + height/4;
     }
+
     private double getDefenseModifier(){
         return 1.9-Math.pow(2.5*height-4.16,4) + Math.pow(2.5*height-4.16,5) + 3*height/10;
     }

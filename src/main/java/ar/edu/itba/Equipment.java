@@ -5,9 +5,9 @@ import java.util.Objects;
 public class Equipment {
 
     protected String name;
-    protected int strength,agility,proficiency,resistance,health;
+    protected double strength,agility,proficiency,resistance,health;
 
-    public Equipment(String name, int strength, int agility, int proficiency, int resistance, int health) {
+    public Equipment(String name, double strength, double agility, double proficiency, double resistance, double health) {
         this.name = name;
         this.strength = strength;
         this.agility = agility;
@@ -21,11 +21,11 @@ public class Equipment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Equipment equipment = (Equipment) o;
-        return strength == equipment.strength &&
-                agility == equipment.agility &&
-                proficiency == equipment.proficiency &&
-                resistance == equipment.resistance &&
-                health == equipment.health;
+        return Double.compare(strength, equipment.strength) == 0 &&
+                Double.compare(agility, equipment.agility) == 0 &&
+                Double.compare(proficiency, equipment.proficiency) == 0 &&
+                Double.compare(resistance, equipment.resistance) == 0 &&
+                Double.compare(health, equipment.health) == 0;
     }
 
     @Override
@@ -33,29 +33,29 @@ public class Equipment {
         return Objects.hash(strength, agility, proficiency, resistance, health);
     }
 
-    public int getStrength() {
+    public double getStrength() {
         return strength;
     }
 
-    public int getAgility() {
+    public double getAgility() {
         return agility;
     }
 
 
 
-    public int getProficiency() {
+    public double getProficiency() {
         return proficiency;
     }
 
 
 
-    public int getResistance() {
+    public double getResistance() {
         return resistance;
     }
 
 
 
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 

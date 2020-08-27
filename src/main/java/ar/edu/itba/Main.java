@@ -1,5 +1,17 @@
 package ar.edu.itba;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.knowm.xchart.*;
+import org.knowm.xchart.style.markers.SeriesMarkers;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
@@ -69,15 +81,11 @@ public class Main {
 
             double[] x = new double[dataX.size()];
             for (int i = 0; i < x.length; i++) {
-                x[i] = dataX.get(i).doubleValue();  // java 1.4 style
-                // or:
-                x[i] = dataX.get(i);                // java 1.5+ style (outboxing)
+                x[i] = dataX.get(i);
             }
             double[] y = new double[dataY.size()];
             for (int i = 0; i < y.length; i++) {
-                y[i] = dataY.get(i).doubleValue();  // java 1.4 style
-                // or:
-                y[i] = dataY.get(i);                // java 1.5+ style (outboxing)
+                y[i] = dataY.get(i);
             }
 
             for(int i = 0; i< numCharts;i++){
