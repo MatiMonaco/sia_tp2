@@ -8,15 +8,15 @@ public class Character {
 
    private final double height;
    private final CharacterType type;
-   protected List<Equipment> equipmentList;
+   private List<Equipment> equipmentList;
 
-    public Character(int height, CharacterType type,List<Equipment> equipmentList) { {
+    public Character(int height, CharacterType type,List<Equipment> equipmentList) {
         this.height = height;
         this.type = type;
         this.equipmentList = equipmentList;
     }
 
-    public  double getFitness(){
+    public double getFitness(){
         return getPerformance();
     }
 
