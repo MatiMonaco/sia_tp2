@@ -10,11 +10,16 @@ public class Character {
    private final CharacterType type;
    protected List<Equipment> equipmentList;
 
-    public Character(int height, CharacterType type,List<Equipment> equipmentList) {
+    public Character(int height, CharacterType type,List<Equipment> equipmentList) { {
         this.height = height;
         this.type = type;
         this.equipmentList = equipmentList;
     }
+
+    public  double getFitness(){
+        return getPerformance();
+    }
+
 
     public double getPerformance(){
         return type.getBaseAttackM() * getAttack() + type.getBaseAttackM() * getDefense();
@@ -32,29 +37,33 @@ public class Character {
         double sum = equipmentList.stream().mapToDouble(Equipment::getStrength).sum();
         return 100*Math.tanh(0.01*sum);
     }
+
     private double getAgility(){
-        if(equipmentList ==null){
+        if(equipmentList == null){
             throw new NullPointerException();
         }
         double sum = equipmentList.stream().mapToDouble(Equipment::getAgility).sum();
         return Math.tanh(0.01*sum);
     }
+
     private double getProficiency(){
-        if(equipmentList ==null){
+        if(equipmentList == null){
             throw new NullPointerException();
         }
         double sum= equipmentList.stream().mapToDouble(Equipment::getProficiency).sum();
         return 0.6*Math.tanh(0.01*sum);
     }
+
     private double getResistance(){
-        if(equipmentList ==null){
+        if(equipmentList == null){
             throw new NullPointerException();
         }
         double sum = equipmentList.stream().mapToDouble(Equipment::getResistance).sum();
         return Math.tanh(0.01*sum);
     }
+
     private double getHealth(){
-        if(equipmentList ==null){
+        if(equipmentList == null){
             throw new NullPointerException();
         }
         double sum = equipmentList.stream().mapToDouble(Equipment::getHealth).sum();
@@ -76,9 +85,4 @@ public class Character {
     protected double getDefense(){
         return (getResistance()+getProficiency())*getHealth()*getDefenseModifier();
     }
-
-
-
-
-
 }
