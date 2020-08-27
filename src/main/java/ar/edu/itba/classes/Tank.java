@@ -10,7 +10,7 @@ public class Tank extends Character {
     }
 
     @Override
-    public double getPerformance() {
+    public double getFitness() {
         return 0.3*getAttack() + 0.8*getDefense();
     }
 }

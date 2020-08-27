@@ -10,7 +10,7 @@ public class Archer extends Character {
     }
 
     @Override
-    public double getPerformance() {
+    public double getFitness() {
         return 0.9 * getAttack() + 0.1*getDefense();
     }
 }

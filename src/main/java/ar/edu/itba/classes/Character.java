@@ -9,16 +9,16 @@ public abstract class Character {
    protected int height;
    protected List<Equipment> equipmentList;
 
-    public abstract double getPerformance();
+    public abstract double getFitness();
 
     public Character(int height, List<Equipment> equipmentList) {
         this.height = height;
         this.equipmentList = equipmentList;
     }
 
-    public  double getRelativePerformance(List<Character> individuals){
-        double sum = individuals.stream().mapToDouble(Character::getPerformance).sum();
-        return getPerformance()/sum;
+    public  double getRelativeFitness(List<Character> individuals){
+        double sum = individuals.stream().mapToDouble(Character::getFitness).sum();
+        return getFitness()/sum;
     }
 
     private double getStrength(){

@@ -10,7 +10,7 @@ public class Infiltrate extends Character {
     }
 
     @Override
-    public double getPerformance() {
+    public double getFitness() {
         return 0.8*getAttack() + 0.3*getDefense();
     }
 }
