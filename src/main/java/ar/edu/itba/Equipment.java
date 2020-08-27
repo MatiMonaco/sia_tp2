@@ -2,7 +2,7 @@ package ar.edu.itba;
 
 import java.util.Objects;
 
-public abstract class Equipment {
+public class Equipment {
 
     protected String name;
     protected int strength,agility,proficiency,resistance,health;
@@ -37,39 +37,27 @@ public abstract class Equipment {
         return strength;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
     public int getAgility() {
         return agility;
     }
 
-    public void setAgility(int agility) {
-        this.agility = agility;
-    }
+
 
     public int getProficiency() {
         return proficiency;
     }
 
-    public void setProficiency(int proficiency) {
-        this.proficiency = proficiency;
-    }
+
 
     public int getResistance() {
         return resistance;
     }
 
-    public void setResistance(int resistance) {
-        this.resistance = resistance;
-    }
+
 
     public int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
+
 }
