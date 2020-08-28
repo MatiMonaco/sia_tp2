@@ -1,22 +1,14 @@
 package ar.edu.itba;
 
-import com.univocity.parsers.common.ParsingContext;
-import com.univocity.parsers.common.processor.ObjectRowProcessor;
-import com.univocity.parsers.conversions.Conversions;
-import com.univocity.parsers.tsv.TsvParser;
-import com.univocity.parsers.tsv.TsvParserSettings;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.knowm.xchart.*;
-import org.knowm.xchart.style.markers.SeriesMarkers;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 public class Main {
@@ -80,7 +72,7 @@ public class Main {
             fcm.updateSeries("divGen",dataX,dataY);
 
             fcm.repaint();
-    j++;
+             j++;
         }
 
 

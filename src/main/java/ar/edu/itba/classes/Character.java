@@ -1,80 +1,99 @@
 package ar.edu.itba.classes;
 
 import ar.edu.itba.Equipment;
+import ar.edu.itba.Genome;
+import ar.edu.itba.Height;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Character {
 
-   private final double height;
-   private final CharacterType type;
-   private List<Equipment> equipmentList;
 
-    public Character(int height, CharacterType type,List<Equipment> equipmentList) {
-        this.height = height;
+   private final CharacterType type;
+   private List<Genome> genomes;
+
+    public Character(CharacterType type,Height height,  List<Equipment> equipmentList) {
         this.type = type;
-        this.equipmentList = equipmentList;
+        this.genomes = new ArrayList<>();
+        genomes.add(height);
+        genomes.addAll(equipmentList);
     }
+
+
 
     public double getFitness(){
-        return getPerformance();
-    }
-
-
-    public double getPerformance(){
         return type.getBaseAttackM() * getAttack() + type.getBaseAttackM() * getDefense();
     }
 
-    public  double getRelativePerformance(List<Character> individuals){
-        double sum = individuals.stream().mapToDouble(Character::getPerformance).sum();
-        return getPerformance()/sum;
+    public  double getRelativeFitness(List<Character> individuals){
+        double sum = individuals.stream().mapToDouble(Character::getFitness).sum();
+        return getFitness()/sum;
     }
 
     private double getStrength(){
-        if(equipmentList == null){
+        if(genomes == null){
             throw new NullPointerException();
         }
-        double sum = equipmentList.stream().mapToDouble(Equipment::getStrength).sum();
+        double sum = 0;
+        for(int i = 1;i < genomes.size();i++){
+            sum += ((Equipment) genomes.get(i)).getStrength();
+        }
         return 100*Math.tanh(0.01*sum);
     }
 
     private double getAgility(){
-        if(equipmentList == null){
+        if(genomes == null){
             throw new NullPointerException();
         }
-        double sum = equipmentList.stream().mapToDouble(Equipment::getAgility).sum();
+        double sum = 0;
+        for(int i = 1;i < genomes.size();i++){
+            sum += ((Equipment) genomes.get(i)).getAgility();
+        }
         return Math.tanh(0.01*sum);
     }
 
     private double getProficiency(){
-        if(equipmentList == null){
+        if(genomes == null){
             throw new NullPointerException();
         }
-        double sum= equipmentList.stream().mapToDouble(Equipment::getProficiency).sum();
+        double sum = 0;
+        for(int i = 1;i < genomes.size();i++){
+            sum += ((Equipment) genomes.get(i)).getProficiency();
+        }
         return 0.6*Math.tanh(0.01*sum);
     }
 
     private double getResistance(){
-        if(equipmentList == null){
+        if(genomes == null){
             throw new NullPointerException();
         }
-        double sum = equipmentList.stream().mapToDouble(Equipment::getResistance).sum();
+        double sum = 0;
+        for(int i = 1;i < genomes.size();i++){
+            sum += ((Equipment) genomes.get(i)).getResistance();
+        }
         return Math.tanh(0.01*sum);
     }
 
     private double getHealth(){
-        if(equipmentList == null){
+        if(genomes == null){
             throw new NullPointerException();
         }
-        double sum = equipmentList.stream().mapToDouble(Equipment::getHealth).sum();
+        double sum = 0;
+        for(int i = 1;i < genomes.size();i++){
+            sum += ((Equipment) genomes.get(i)).getHealth();
+        }
         return 100*Math.tanh(0.01*sum);
     }
 
-    private double getAttackModifier(){
-        return 0.7-Math.pow(3*height-5,4) + Math.pow(3*height-5,5) + height/4;
+    private double getAttackModifier()
+    {
+        double height = ((Height)genomes.get(0)).getHeight();
+        return 0.7-Math.pow(3*-5,4) + Math.pow(3*height-5,5) + height/4;
     }
 
     private double getDefenseModifier(){
+        double height = ((Height)genomes.get(0)).getHeight();
         return 1.9-Math.pow(2.5*height-4.16,4) + Math.pow(2.5*height-4.16,5) + 3*height/10;
     }
 

@@ -46,17 +46,6 @@ public class Database {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     public static void load(){
 
         TsvParserSettings settings = new TsvParserSettings();
@@ -64,7 +53,7 @@ public class Database {
 
             @Override
             public void rowProcessed(Object[] row, ParsingContext parsingContext) {
-                boots.put((String) row[0], new Equipment((String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
+                boots.put((String) row[0], new Equipment("boots",(String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
 
             }
         };
@@ -72,7 +61,7 @@ public class Database {
 
             @Override
             public void rowProcessed(Object[] row, ParsingContext parsingContext) {
-                weapons.put((String) row[0], new Equipment((String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
+                weapons.put((String) row[0], new Equipment("weapon",(String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
 
             }
         };
@@ -80,7 +69,7 @@ public class Database {
 
             @Override
             public void rowProcessed(Object[] row, ParsingContext parsingContext) {
-                helmets.put((String) row[0], new Equipment((String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
+                helmets.put((String) row[0], new Equipment("helmet",(String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
 
             }
         };
@@ -88,7 +77,7 @@ public class Database {
 
             @Override
             public void rowProcessed(Object[] row, ParsingContext parsingContext) {
-                gloves.put((String) row[0], new Equipment((String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
+                gloves.put((String) row[0], new Equipment("gloves",(String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
 
             }
         };
@@ -96,7 +85,7 @@ public class Database {
 
             @Override
             public void rowProcessed(Object[] row, ParsingContext parsingContext) {
-                armor.put((String) row[0], new Equipment((String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
+                armor.put((String) row[0], new Equipment("armor",(String) row[0], Double.parseDouble((String) row[1]), Double.parseDouble((String) row[2]), Double.parseDouble((String) row[3]), Double.parseDouble((String) row[4]), Double.parseDouble((String) row[5])));
 
             }
         };

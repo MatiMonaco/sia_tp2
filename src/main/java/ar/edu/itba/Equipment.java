@@ -1,14 +1,17 @@
 package ar.edu.itba;
 
+import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Random;
 
-public class Equipment {
+public class Equipment extends Genome{
 
     protected String name;
+    protected String type;
     protected double strength,agility,proficiency,resistance,health;
 
-    public Equipment(String name, double strength, double agility, double proficiency, double resistance, double health) {
+    public Equipment(String type,String name, double strength, double agility, double proficiency, double resistance, double health) {
         this.name = name;
         this.strength = strength;
         this.agility = agility;
@@ -73,4 +76,14 @@ public class Equipment {
     }
 
 
+    @Override
+    public void mutate() {
+        int randomInt = (int)(1000000 * Math.random());
+        Equipment mutation = Database.getEquipment(type,String.valueOf(randomInt));
+        this.strength = mutation.getStrength();
+        this.agility = mutation.getAgility();
+        this.health = mutation.getHealth();
+        this.proficiency = mutation.getProficiency();
+        this.resistance = mutation.getResistance();
+    }
 }
