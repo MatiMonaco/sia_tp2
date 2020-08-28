@@ -8,7 +8,6 @@ import com.univocity.parsers.tsv.TsvParserSettings;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +17,45 @@ public class Database {
     public static Map<String,Equipment> gloves = new HashMap<>();
     public static Map<String,Equipment> helmets = new HashMap<>();
     public static Map<String,Equipment> armor = new HashMap<>();
+
+
+
+    public static Equipment getEquipment(String type,String name){
+        Equipment eq = null;
+        switch (type){
+            case "weapon":
+                eq = weapons.get(name);
+                break;
+            case "helmet":
+                eq = helmets.get(name);
+                break;
+            case "armor":
+                eq = armor.get(name);
+                break;
+            case "glove":
+                eq = gloves.get(name);
+                break;
+            case "boots":
+                eq = boots.get(name);
+                break;
+
+            default:
+                throw new IllegalArgumentException();
+        }
+        return eq;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void load(){
 
