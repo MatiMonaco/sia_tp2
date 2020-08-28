@@ -3,8 +3,14 @@ package ar.edu.itba;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
+import org.knowm.xchart.XYSeries;
 import org.knowm.xchart.internal.chartpart.Chart;
+import org.knowm.xchart.style.colors.SeriesColors;
+import org.knowm.xchart.style.colors.XChartSeriesColors;
+import org.knowm.xchart.style.lines.SeriesLines;
+import org.knowm.xchart.style.markers.SeriesMarkers;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +27,13 @@ public class FitnessChartMatrix {
     public void addChart(String name,String xTitle,double xMin,String yTitle,double yMin){
         XYChart chart = new XYChartBuilder().xAxisTitle(xTitle).yAxisTitle(yTitle).width(600).height(400).build();
         chart.getStyler().setYAxisMin((double) 0);
-        chart.addSeries(name, new double[]{0}, new double[]{0});
+
+
+        XYSeries series = chart.addSeries(name, new double[]{0}, new double[]{0});
+        series.setLineColor(XChartSeriesColors.BLUE);
+        series.setMarkerColor(Color.RED);
+        series.setMarker(SeriesMarkers.CIRCLE);
+        series.setLineStyle(SeriesLines.DOT_DOT);
         charts.put(name,chart);
     }
 
