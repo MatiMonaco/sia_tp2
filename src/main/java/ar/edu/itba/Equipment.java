@@ -1,5 +1,6 @@
 package ar.edu.itba;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Equipment {
@@ -26,6 +27,18 @@ public class Equipment {
                 Double.compare(proficiency, equipment.proficiency) == 0 &&
                 Double.compare(resistance, equipment.resistance) == 0 &&
                 Double.compare(health, equipment.health) == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipment{" +
+                "name='" + name + '\'' +
+                ", strength=" + strength +
+                ", agility=" + agility +
+                ", proficiency=" + proficiency +
+                ", resistance=" + resistance +
+                ", health=" + health +
+                '}';
     }
 
     @Override

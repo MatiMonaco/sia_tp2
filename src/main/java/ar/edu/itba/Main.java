@@ -25,25 +25,7 @@ public class Main {
 
         JSONParser jsonParser = new JSONParser();
         String path = "./config.json";
-
-        TsvParserSettings settings = new TsvParserSettings();
-        ObjectRowProcessor rowProcessor = new ObjectRowProcessor() {
-            @Override
-            public void rowProcessed(Object[] row, ParsingContext context) {
-                //here is the row. Let's just print it.
-                System.out.println(Arrays.toString(row));
-            }
-        };
-        rowProcessor.convertIndexes(Conversions.toBigDecimal()).set(2, 5);
-        rowProcessor.convertFields(Conversions.trim(), Conversions.toLowerCase()).set("Description", "Model");
-        settings.setRowProcessor(rowProcessor);
-
-        TsvParser parser = new TsvParser(settings);
-        try {
-            parser.parse(new FileReader("./src/main/Resources/armas.tsv"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Database.load();
 
         try (Reader reader = new FileReader(path)) {
 

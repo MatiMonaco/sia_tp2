@@ -32,7 +32,7 @@ public class FitnessChartMatrix {
     public void displayChartMatrix(){
         List<XYChart> list = new ArrayList<>();
         charts.values().forEach(value-> list.add(value));
-      
+
         sw = new SwingWrapper<>(list);
         sw.displayChartMatrix();
     }
