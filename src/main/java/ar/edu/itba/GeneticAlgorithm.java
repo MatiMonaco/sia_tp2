@@ -62,6 +62,7 @@ public abstract class GeneticAlgorithm {
         fcm.updateSeries("maxFitness",generationList,dataMaxFitness);
         fcm.updateSeries("avgFitness",generationList,dataAvgFitness);
         fcm.updateSeries("divGen",generationList,dataGeneticDiv);
+        fcm.repaint();
     }
 
     private void loadInitialPopulation(int initialSize,CharacterType characterType){
