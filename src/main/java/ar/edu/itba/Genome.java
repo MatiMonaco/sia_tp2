@@ -1,6 +1,6 @@
 package ar.edu.itba;
 
-public abstract class Genome {
+public interface Genome {
 
-    public abstract void mutate();
+    void mutate();
 }

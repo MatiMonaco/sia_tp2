@@ -1,8 +1,9 @@
 package ar.edu.itba;
 
+import java.util.Objects;
 import java.util.Random;
 
-public class Height extends Genome {
+public class Height implements Genome {
 
     private double height;
     public static final double MAX_HEIGHT = 2.2;
@@ -30,5 +31,16 @@ public class Height extends Genome {
         this.height = height;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Height height1 = (Height) o;
+        return Double.compare(height1.height, height) == 0;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(height);
+    }
 }

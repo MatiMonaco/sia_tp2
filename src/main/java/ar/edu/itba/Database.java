@@ -20,8 +20,9 @@ public class Database {
 
 
 
-    public static Equipment getEquipment(String type,String name){
+    public static Equipment getRandomEquipment(String type){
         Equipment eq = null;
+        String name = getRandomName();
         switch (type){
             case "weapon":
                 eq = weapons.get(name);
@@ -45,6 +46,9 @@ public class Database {
         return eq;
     }
 
+    public static String getRandomName(){
+        return String.valueOf((int)(1000000 * Math.random()));
+    }
 
     public static void load(){
 

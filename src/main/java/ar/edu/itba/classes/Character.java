@@ -6,6 +6,7 @@ import ar.edu.itba.Height;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Character {
 
@@ -20,7 +21,32 @@ public class Character {
         genomes.addAll(equipmentList);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Character character = (Character) o;
+        Height height = (Height) ((Character) o).genomes.get(0);
 
+        if(height.equals((Height)genomes.get(0))){
+            for(int i = 1; i < genomes.size();i++){
+                Equipment eq = (Equipment) ((Character) o).genomes.get(i);
+                if(!eq.equals((Equipment)genomes.get(i))){
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+
+        return true;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, genomes);
+    }
 
     public double getFitness(){
         return type.getBaseAttackM() * getAttack() + type.getBaseAttackM() * getDefense();

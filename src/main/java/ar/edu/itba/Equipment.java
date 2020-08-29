@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Random;
 
-public class Equipment extends Genome{
+public class Equipment implements Genome{
 
     protected String name;
     protected String type;
@@ -78,8 +78,7 @@ public class Equipment extends Genome{
 
     @Override
     public void mutate() {
-        int randomInt = (int)(1000000 * Math.random());
-        Equipment mutation = Database.getEquipment(type,String.valueOf(randomInt));
+        Equipment mutation = Database.getRandomEquipment(type);
         this.strength = mutation.getStrength();
         this.agility = mutation.getAgility();
         this.health = mutation.getHealth();
