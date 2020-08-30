@@ -11,14 +11,19 @@ import java.util.Objects;
 public class Character {
 
 
-   private final CharacterType type;
-   private List<Genome> genomes;
+    private final CharacterType type;
+    private final List<Genome> genomes;
 
     public Character(CharacterType type,Height height,  List<Equipment> equipmentList) {
         this.type = type;
         this.genomes = new ArrayList<>();
         genomes.add(height);
         genomes.addAll(equipmentList);
+    }
+
+    public Character(CharacterType type, List<Genome> genomes){
+        this.type = type;
+        this.genomes = genomes;
     }
 
     @Override
@@ -41,6 +46,14 @@ public class Character {
 
         return true;
 
+    }
+
+    public List<Genome> getGenomes() {
+        return genomes;
+    }
+
+    public CharacterType getType() {
+        return type;
     }
 
     @Override
