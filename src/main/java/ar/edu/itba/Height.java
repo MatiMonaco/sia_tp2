@@ -43,4 +43,11 @@ public class Height implements Genome {
     public int hashCode() {
         return Objects.hash(height);
     }
+
+    @Override
+    public String toString() {
+        return "Height{" +
+                "height=" + height +
+                '}';
+    }
 }

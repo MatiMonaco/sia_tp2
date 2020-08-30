@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FillAll extends GeneticAlgorithm {
     public FillAll(int initialSize, int selectionsSize, int newGenerationSize, double pm, CharacterType characterType) {
-        super(initialSize, selectionsSize, newGenerationSize, pm, characterType);
+        super(initialSize, characterType);
 
     }
 

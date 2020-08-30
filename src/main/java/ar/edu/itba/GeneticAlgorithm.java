@@ -19,21 +19,22 @@ public abstract class GeneticAlgorithm {
     protected BiFunction<Character,Double,Void> mutate;
     protected BiFunction<Integer,List<Character>,List<Character>> replacement;
     protected double generation;
-    protected  FitnessChartMatrix fcm;
-    protected List<Double> dataMaxFitness;
-    protected List<Double> dataMinFitness;
-    protected List<Double> dataAvgFitness;
-    protected List<Double> dataGeneticDiv;
+    private  FitnessChartMatrix fcm;
+    private List<Double> dataMaxFitness;
+    private List<Double> dataMinFitness;
+    private List<Double> dataAvgFitness;
+    private List<Double> dataGeneticDiv;
     protected List<Double> generationList;
 
 
-    public GeneticAlgorithm(int initialSize,int selectionsSize,int newGenerationSize,double pm, CharacterType characterType){
+    public GeneticAlgorithm(int initialSize, CharacterType characterType){
         this.characterType = characterType;
         generation = 0;
+
         loadInitialPopulation(initialSize,characterType);
         initializeCharts();
 
-        start(pm,selectionsSize,newGenerationSize);
+
     }
 
     private void initializeCharts(){
@@ -66,6 +67,7 @@ public abstract class GeneticAlgorithm {
     }
 
     private void loadInitialPopulation(int initialSize,CharacterType characterType){
+        population = new ArrayList<>();
         for(int i = 0; i < initialSize;i++){
 
             String types[] = {"helmet","armor","weapon","gloves","boots"};
@@ -78,5 +80,10 @@ public abstract class GeneticAlgorithm {
             population.add(character);
         }
     }
-    public abstract void start(double pm, int selectionQuantity,int newGenerationSize);
+
+    public List<Character> getPopulation() {
+        return population;
+    }
+
+    public abstract void start(double pm, int selectionQuantity, int newGenerationSize);
 }

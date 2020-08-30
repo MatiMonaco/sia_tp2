@@ -1,5 +1,7 @@
 package ar.edu.itba;
 
+
+import ar.edu.itba.classes.CharacterType;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -9,7 +11,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -50,32 +54,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        FitnessChartMatrix fcm = new FitnessChartMatrix();
-        fcm.addChart("minFitness","Generation",0,"Minimum Fitness",0);
-        fcm.addChart("maxFitness","Generation",0,"Maximum Fitness",0);
-        fcm.addChart("avgFitness","Generation",0,"Average Fitness",0);
-        fcm.addChart("divGen","Generation",0,"Genetic Divergence",0);
-        fcm.displayChartMatrix();
+        GeneticAlgorithm fillAll = new FillAll(10,5,10,0.2, CharacterType.WARRIOR);
 
-        double j = 0;
-       List<Double> dataX, dataY;
-       dataX = new ArrayList<>();
-       dataY = new ArrayList<>();
-        while (j < 100) {
-            dataX.add(j);
-            dataY.add(j);
-            Thread.sleep(50);
-
-            fcm.updateSeries("minFitness",dataX,dataY);
-            fcm.updateSeries("maxFitness",dataX,dataY);
-            fcm.updateSeries("avgFitness",dataX,dataY);
-            fcm.updateSeries("divGen",dataX,dataY);
-
-            fcm.repaint();
-             j++;
-        }
-
-
+        System.out.println(fillAll.getPopulation().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
 
     }
 
