@@ -1,0 +1,85 @@
+package ar.edu.itba;
+
+import ar.edu.itba.classes.Character;
+
+import java.util.*;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+
+public class Selection {
+
+    public static final Map<String, BiFunction<Integer, List<Character>,List<Character>>> map = new HashMap<>();
+
+    public static List<Character> elite(int selectionSize,List<Character> population){
+
+        if(population.isEmpty()){
+           return null;
+        }
+
+       List<Character> sortedList = population.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+       int k = 0;
+       int populationSize = sortedList.size();
+       List<Character> selection = new ArrayList<>();
+       while(k < selectionSize){
+           int i = k%populationSize;
+           selection.add(sortedList.get(i));
+           k++;
+       }
+       return selection;
+    }
+
+    public List<Character> roulette(int selectionSize,List<Character>population){
+        double totalFitness = population.stream().mapToDouble(Character::getFitness).sum();
+        List<Double> relativeFitness =  population.stream().map(value -> value.getRelativeFitness(totalFitness)).collect(Collectors.toList());
+        List<Double> accumulatedFitness = new ArrayList<>();
+        for(int i = 0; i < population.size();i++){
+            double acum = 0;
+            for(int j = 0; j <= i;j++){
+                acum+= relativeFitness.get(j);
+            }
+            accumulatedFitness.add(acum);
+        }
+        int k = 0;
+        List<Character> selection = new ArrayList<>();
+        while(k < selectionSize){
+            double random = Math.random();
+            for(int i = 0; i < accumulatedFitness.size()-1;i++){
+                double acum1 = accumulatedFitness.get(i);
+                double acum2 =accumulatedFitness.get(i+1);
+                if(acum1 < random && random <= acum2){
+                    selection.add(population.get(i+1));
+                }
+            }
+        }
+        return  selection;
+    }
+
+    public List<Character> universal(int selectionSize,List<Character>population){
+        double totalFitness = population.stream().mapToDouble(Character::getFitness).sum();
+        List<Double> relativeFitness =  population.stream().map(value -> value.getRelativeFitness(totalFitness)).collect(Collectors.toList());
+        List<Double> accumulatedFitness = new ArrayList<>();
+        for(int i = 0; i < population.size();i++){
+            double acum = 0;
+            for(int j = 0; j <= i;j++){
+                acum+= relativeFitness.get(j);
+            }
+            accumulatedFitness.add(acum);
+        }
+        int k = 0;
+        List<Character> selection = new ArrayList<>();
+        while(k < selectionSize){
+            double random = (Math.random()+k)/selectionSize;
+            for(int i = 0; i < accumulatedFitness.size()-1;i++){
+                double acum1 = accumulatedFitness.get(i);
+                double acum2 =accumulatedFitness.get(i+1);
+                if(acum1 < random && random <= acum2){
+                    selection.add(population.get(i+1));
+                }
+            }
+        }
+        return  selection;
+    }
+
+
+}

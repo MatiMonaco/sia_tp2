@@ -1,20 +1,17 @@
 package ar.edu.itba;
 
+import ar.edu.itba.classes.Character;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 import org.knowm.xchart.XYSeries;
-import org.knowm.xchart.internal.chartpart.Chart;
-import org.knowm.xchart.style.colors.SeriesColors;
 import org.knowm.xchart.style.colors.XChartSeriesColors;
 import org.knowm.xchart.style.lines.SeriesLines;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class FitnessChartMatrix {
     private SwingWrapper<XYChart> sw;
@@ -54,4 +51,17 @@ public class FitnessChartMatrix {
            sw.repaintChart(i);
        }
     }
+
+    public double getMaximumFitness(List<Character> population){
+        return population.stream().max(Comparator.comparing(Character::getFitness)).get().getFitness();
+
+
+    }
+    public double getAverageFitness(List<Character> population){
+        return population.stream().mapToDouble(Character::getFitness).sum()/population.size();
+    }
+    public double getMinimumFitness(List<Character> population){
+        return population.stream().min(Comparator.comparing(Character::getFitness)).get().getFitness();
+    }
+
 }

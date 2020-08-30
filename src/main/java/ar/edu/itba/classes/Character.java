@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Character {
+public class Character implements Comparable<Character> {
 
 
-    private final CharacterType type;
-    private final List<Genome> genomes;
+   private final CharacterType type;
+   private final List<Genome> genomes;
+   private Double fitness;
 
     public Character(CharacterType type,Height height,  List<Equipment> equipmentList) {
         this.type = type;
@@ -56,18 +57,29 @@ public class Character {
         return type;
     }
 
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "type=" + type +
+                ", fitness=" + getFitness() +
+                '}';
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(type, genomes);
     }
 
     public double getFitness(){
-        return type.getBaseAttackM() * getAttack() + type.getBaseAttackM() * getDefense();
+        if(fitness == null){
+            fitness = type.getBaseAttackM() * getAttack() + type.getBaseAttackM() * getDefense();
+        }
+        return fitness;
     }
 
-    public  double getRelativeFitness(List<Character> individuals){
-        double sum = individuals.stream().mapToDouble(Character::getFitness).sum();
-        return getFitness()/sum;
+    public  double getRelativeFitness(double totalFitness){
+        return getFitness()/totalFitness;
     }
 
     private double getStrength(){
@@ -128,6 +140,7 @@ public class Character {
     private double getAttackModifier()
     {
         double height = ((Height)genomes.get(0)).getHeight();
+        System.out.println("height:"+height);
         return 0.7-Math.pow(3*-5,4) + Math.pow(3*height-5,5) + height/4;
     }
 
@@ -142,5 +155,10 @@ public class Character {
 
     protected double getDefense(){
         return (getResistance()+getProficiency())*getHealth()*getDefenseModifier();
+    }
+
+    @Override
+    public int compareTo(Character o) {
+        return Double.compare(getFitness(),o.getFitness());
     }
 }

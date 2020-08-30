@@ -13,8 +13,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -118,8 +119,9 @@ public class Main {
             fcm.repaint();
              j++;
         }
+        GeneticAlgorithm fillAll = new FillAll(10,5,10,0.2, CharacterType.WARRIOR);
 
-
+        System.out.println(fillAll.getPopulation().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
 
     }
 
