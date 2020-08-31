@@ -148,8 +148,8 @@ public class Selection {
         return selection;
     }
 
-    public static List<Character> probabilisticTournament(int selectionSize,List<Character>population,double treshold ){
-        if(treshold < 0.5 || treshold >1){
+    public static List<Character> probabilisticTournament(int selectionSize,List<Character>population,double threshold ){
+        if(threshold < 0.5 || threshold >1){
             throw new IllegalArgumentException();
         }
         int k = 0;
@@ -163,9 +163,9 @@ public class Selection {
             Character aux1 = population.get(random1);
             Character aux2 = population.get(random2);
 
-            double randomTreshold = (size*Math.random());
+            double randomThreshold = (size*Math.random());
 
-            if(randomTreshold < treshold){
+            if(randomThreshold < threshold){
                 winner = aux1.getFitness() > aux2.getFitness() ? aux1 : aux2;
 
             }else{
