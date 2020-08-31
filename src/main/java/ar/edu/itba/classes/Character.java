@@ -12,7 +12,7 @@ public class Character implements Comparable<Character> {
 
 
    private final CharacterType type;
-   private List<Genome> genomes;
+   private final List<Genome> genomes;
    private Double fitness;
 
     public Character(CharacterType type,Height height,  List<Equipment> equipmentList) {
@@ -20,6 +20,11 @@ public class Character implements Comparable<Character> {
         this.genomes = new ArrayList<>();
         genomes.add(height);
         genomes.addAll(equipmentList);
+    }
+
+    public Character(CharacterType type, List<Genome> genomes){
+        this.type = type;
+        this.genomes = genomes;
     }
 
     @Override
@@ -42,6 +47,14 @@ public class Character implements Comparable<Character> {
 
         return true;
 
+    }
+
+    public List<Genome> getGenomes() {
+        return genomes;
+    }
+
+    public CharacterType getType() {
+        return type;
     }
 
 

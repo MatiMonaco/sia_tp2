@@ -1,11 +1,13 @@
 package ar.edu.itba;
 
-
+import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.knowm.xchart.style.markers.Cross;
 
+import javax.xml.crypto.Data;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -54,6 +56,69 @@ public class Main {
             e.printStackTrace();
         }
 
+        // Testeo de crossing
+//        List<Equipment> equipment1 = new ArrayList<>();
+//        equipment1.add(Database.getRandomEquipment("weapon"));
+//        equipment1.add(Database.getRandomEquipment("helmet"));
+//        equipment1.add(Database.getRandomEquipment("armor"));
+//        equipment1.add(Database.getRandomEquipment("glove"));
+//        equipment1.add(Database.getRandomEquipment("boots"));
+//        Character padre = new Character(CharacterType.ARCHER, new Height(1.8), equipment1);
+//
+//        List<Equipment> equipment2 = new ArrayList<>();
+//        equipment2.add(Database.getRandomEquipment("weapon"));
+//        equipment2.add(Database.getRandomEquipment("helmet"));
+//        equipment2.add(Database.getRandomEquipment("armor"));
+//        equipment2.add(Database.getRandomEquipment("glove"));
+//        equipment2.add(Database.getRandomEquipment("boots"));
+//        Character madre = new Character(CharacterType.ARCHER, new Height(1.78), equipment2);
+//
+//        List<Character> hijes = Crossing.uniformCrossing(padre, madre);
+//
+//        System.out.println("PADRES--------------------");
+//        List<Genome> gs1 = padre.getGenomes();
+//        for(Genome g: gs1){
+//            System.out.println(g);
+//        }
+//        List<Genome> gs2 = madre.getGenomes();
+//        for(Genome g: gs2){
+//            System.out.println(g);
+//        }
+//        System.out.println("HIJOS---------------------");
+//        int i = 1;
+//        for (Character c : hijes) {
+//            System.out.printf("HIJO NUMERO %d\n", i++);
+//            List<Genome> gs = c.getGenomes();
+//            for(Genome g: gs){
+//                System.out.println(g);
+//            }
+//        }
+        ////////////////////////
+
+        FitnessChartMatrix fcm = new FitnessChartMatrix();
+        fcm.addChart("minFitness","Generation",0,"Minimum Fitness",0);
+        fcm.addChart("maxFitness","Generation",0,"Maximum Fitness",0);
+        fcm.addChart("avgFitness","Generation",0,"Average Fitness",0);
+        fcm.addChart("divGen","Generation",0,"Genetic Divergence",0);
+        fcm.displayChartMatrix();
+
+        double j = 0;
+       List<Double> dataX, dataY;
+       dataX = new ArrayList<>();
+       dataY = new ArrayList<>();
+        while (j < 100) {
+            dataX.add(j);
+            dataY.add(j);
+            Thread.sleep(50);
+
+            fcm.updateSeries("minFitness",dataX,dataY);
+            fcm.updateSeries("maxFitness",dataX,dataY);
+            fcm.updateSeries("avgFitness",dataX,dataY);
+            fcm.updateSeries("divGen",dataX,dataY);
+
+            fcm.repaint();
+             j++;
+        }
         GeneticAlgorithm fillAll = new FillAll(10,5,10,0.2, CharacterType.WARRIOR);
 
         System.out.println(fillAll.getPopulation().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
