@@ -6,7 +6,7 @@ import java.util.Random;
 public class Height implements Genome {
 
     private double height;
-    public static final double MAX_HEIGHT = 2.2;
+    public static final double MAX_HEIGHT = 2.0;
     public static final double MIN_HEIGHT = 1.3;
 
     public Height() {

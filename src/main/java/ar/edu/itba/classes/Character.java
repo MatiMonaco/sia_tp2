@@ -26,13 +26,13 @@ public class Character implements Comparable<Character> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Character character = (Character) o;
+
         Height height = (Height) ((Character) o).genomes.get(0);
 
-        if(height.equals((Height)genomes.get(0))){
+        if(height.equals(genomes.get(0))){
             for(int i = 1; i < genomes.size();i++){
                 Equipment eq = (Equipment) ((Character) o).genomes.get(i);
-                if(!eq.equals((Equipment)genomes.get(i))){
+                if(!eq.equals(genomes.get(i))){
                     return false;
                 }
             }
@@ -60,7 +60,7 @@ public class Character implements Comparable<Character> {
 
     public double getFitness(){
         if(fitness == null){
-            fitness = type.getBaseAttackM() * getAttack() + type.getBaseAttackM() * getDefense();
+            fitness = type.getBaseAttackM() * getAttack() + type.getBaseDefenseM() * getDefense();
         }
         return fitness;
     }
@@ -127,17 +127,21 @@ public class Character implements Comparable<Character> {
     private double getAttackModifier()
     {
         double height = ((Height)genomes.get(0)).getHeight();
-        System.out.println("height:"+height);
-        return 0.7-Math.pow(3*-5,4) + Math.pow(3*height-5,5) + height/4;
+        return 0.7-Math.pow(3*height-5,4) + Math.pow(3*height-5,2) + height/4;
     }
 
     private double getDefenseModifier(){
         double height = ((Height)genomes.get(0)).getHeight();
-        return 1.9-Math.pow(2.5*height-4.16,4) + Math.pow(2.5*height-4.16,5) + 3*height/10;
+        return 1.9-Math.pow(2.5*height-4.16,4) + Math.pow(2.5*height-4.16,2) + 3*height/10;
     }
 
     protected double getAttack(){
-        return (getAgility()+getProficiency())*getStrength()*getAttackModifier();
+
+        double agility = getAgility();
+        double prof = getProficiency();
+        double str = getStrength();
+        double am = getAttackModifier();
+        return ((agility+prof)*str)*am;
     }
 
     protected double getDefense(){
