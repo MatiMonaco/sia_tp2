@@ -3,6 +3,7 @@ package ar.edu.itba;
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
 import ar.edu.itba.convergences.Convergence;
+import ar.edu.itba.convergences.GenerationQuantityConvergence;
 import ar.edu.itba.convergences.TimeConvergence;
 import ar.edu.itba.selections.*;
 import org.json.simple.JSONObject;
@@ -121,8 +122,8 @@ public class Main {
 //        }
         /////////////
 
-        GeneticAlgorithm fillAll = new FillAll(100,50,new Roulette(),new Roulette(),new Roulette(),new Roulette(),80,0.3,0.5,0.5,
-                new TimeConvergence(30,System.currentTimeMillis()/1000),Crossing::uniformCrossing,Mutation::complete,CharacterType.WARRIOR);
+        GeneticAlgorithm fillAll = new FillAll(300,100,new DeterministicTournament(50),new DeterministicTournament(50),new DeterministicTournament(50),new DeterministicTournament(50),80,0.5,0.5,0.5,
+                new GenerationQuantityConvergence(80),Crossing::uniformCrossing,Mutation::complete,CharacterType.WARRIOR);
 
         fillAll.start();
 

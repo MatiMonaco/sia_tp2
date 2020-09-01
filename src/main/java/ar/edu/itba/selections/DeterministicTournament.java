@@ -28,6 +28,7 @@ public class DeterministicTournament  extends Selection{
             Character winner = null;
             while(m< M){
                 int random = (int) (size*Math.random());
+
                 Character aux = population.get(random);
                 if(winner == null) {
                     winner = aux;
@@ -35,7 +36,9 @@ public class DeterministicTournament  extends Selection{
                     winner = aux;
                 }
                 m++;
+
             }
+            System.out.println("winner:"+winner);
             selection.add(winner);
             k++;
         }

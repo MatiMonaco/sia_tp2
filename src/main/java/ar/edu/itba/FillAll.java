@@ -22,6 +22,7 @@ public class FillAll extends GeneticAlgorithm {
 
         List<Character> lastPopulation = new ArrayList<>(population);
         while(!convergence.checkConvergence(lastPopulation,population,generation)){
+            System.out.println("gen "+generation+": "+population);
             System.out.println("While");
             //selection
             int selectionSizeA = (int) (selectionsSize * pa);
