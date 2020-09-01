@@ -2,13 +2,14 @@ package ar.edu.itba;
 
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
+import ar.edu.itba.selections.Selection;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FillAll extends GeneticAlgorithm {
-    public FillAll(int initialSize,int selectionSize,int newGenerationSize, double pm,double pa,double pb, CharacterType characterType) {
-        super(initialSize,selectionSize,newGenerationSize,pm,pa,pb,characterType);
+    public FillAll(int initialSize, int selectionSize, Selection selectionA, Selection selectionB, Selection replacementA, Selection replacementB, int newGenerationSize, double pm, double pa, double pb, CharacterType characterType) {
+        super(initialSize,selectionSize,selectionA,selectionB,replacementA,replacementB,newGenerationSize,pm,pa,pb,characterType);
 
     }
 
@@ -52,15 +53,21 @@ public class FillAll extends GeneticAlgorithm {
             totalPopulation.addAll(newGeneration);
             int replacementSizeA = (int) (newGenerationSize * pb);
             int replacementSizeB = newGenerationSize-replacementSizeA;
-
-            List<Character> replacementA = selectionA.select(replacementSizeA,newGeneration,generation);
-            List<Character> replacementB = selectionB.select(replacementSizeB,newGeneration,generation);
             population = new ArrayList<>();
-            if(replacementA != null){
-                population.addAll(replacementA);
+            List<Character> replaceA = null,replaceB = null;
+            if(replacementA!= null){
+                replaceA = replacementA.select(replacementSizeA,totalPopulation,generation);
             }
-            if(replacementB !=null){
-                population.addAll(replacementB);
+
+            if(replacementB != null){
+               replaceB = replacementB.select(replacementSizeB,totalPopulation,generation);
+
+            }
+            if(replaceA != null){
+                population.addAll(replaceA);
+            }
+            if(replaceB !=null){
+                population.addAll(replaceB);
             }
 
             generation++;
