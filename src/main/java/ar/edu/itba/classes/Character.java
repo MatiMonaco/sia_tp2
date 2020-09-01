@@ -5,6 +5,7 @@ import ar.edu.itba.Genome;
 import ar.edu.itba.Height;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,18 @@ public class Character implements Comparable<Character> {
         this.type = type;
         this.genomes = genomes;
     }
+
+    public static double getMaximumFitness(List<Character> population){
+        return population.stream().max(Comparator.comparing(Character::getFitness)).get().getFitness();
+    }
+    public static double getAverageFitness(List<Character> population){
+        return population.stream().mapToDouble(Character::getFitness).sum()/population.size();
+    }
+    public static double getMinimumFitness(List<Character> population){
+        return population.stream().min(Comparator.comparing(Character::getFitness)).get().getFitness();
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

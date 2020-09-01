@@ -2,6 +2,8 @@ package ar.edu.itba;
 
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
+import ar.edu.itba.convergences.Convergence;
+import ar.edu.itba.convergences.TimeConvergence;
 import ar.edu.itba.selections.Elite;
 import ar.edu.itba.selections.Selection;
 import org.json.simple.JSONObject;
@@ -129,12 +131,7 @@ public class Main {
 
 
 
-
-
-
-
-
-
+/*
 
         FitnessChartMatrix fcm = new FitnessChartMatrix();
         fcm.addChart("minFitness","Generation",0,"Minimum Fitness",0);
@@ -160,6 +157,7 @@ public class Main {
             fcm.repaint();
              j++;
         }
+*/
 
 
     }

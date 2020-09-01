@@ -52,16 +52,5 @@ public class FitnessChartMatrix {
        }
     }
 
-    public double getMaximumFitness(List<Character> population){
-        return population.stream().max(Comparator.comparing(Character::getFitness)).get().getFitness();
-
-
-    }
-    public double getAverageFitness(List<Character> population){
-        return population.stream().mapToDouble(Character::getFitness).sum()/population.size();
-    }
-    public double getMinimumFitness(List<Character> population){
-        return population.stream().min(Comparator.comparing(Character::getFitness)).get().getFitness();
-    }
 
 }
