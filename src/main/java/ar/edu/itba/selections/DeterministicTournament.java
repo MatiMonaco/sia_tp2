@@ -1,0 +1,40 @@
+package ar.edu.itba.selections;
+
+import ar.edu.itba.classes.Character;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DeterministicTournament  extends Selection{
+
+    private int M;
+
+    public DeterministicTournament(int selectionSize,int m) {
+        super(selectionSize);
+        M = m;
+    }
+
+    @Override
+    public List<Character> select( List<Character> population,int generation) {
+        int k = 0;
+        int size = population.size();
+        List<Character> selection = new ArrayList<>();
+        while(k < selectionSize){
+            int m = 0;
+            Character winner = null;
+            while(m< M){
+                int random = (int) (size*Math.random());
+                Character aux = population.get(random);
+                if(winner == null) {
+                    winner = aux;
+                }else if(aux.getFitness() > winner.getFitness()){
+                    winner = aux;
+                }
+                m++;
+            }
+            selection.add(winner);
+            k++;
+        }
+        return selection;
+    }
+}

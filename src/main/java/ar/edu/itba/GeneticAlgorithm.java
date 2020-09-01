@@ -2,6 +2,7 @@ package ar.edu.itba;
 
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
+import ar.edu.itba.selections.Selection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,21 +15,28 @@ public abstract class GeneticAlgorithm {
     protected List<Character> population;
     protected CharacterType characterType;
     protected BiFunction<List<Character>,List<Character>,Boolean> checkConverge;
-    protected BiFunction<Integer,List<Character>,List<Character>> selection;
+    protected Selection selection;
     protected BiFunction<Character,Character,List<Character>> crossing;
     protected BiFunction<Character,Double,Void> mutate;
     protected BiFunction<Integer,List<Character>,List<Character>> replacement;
-    protected double generation;
+
+    protected int generation;
     private  FitnessChartMatrix fcm;
     private List<Double> dataMaxFitness;
     private List<Double> dataMinFitness;
     private List<Double> dataAvgFitness;
     private List<Double> dataGeneticDiv;
     protected List<Double> generationList;
+    protected int selectionsSize;
+    protected int newGenerationSize;
+    protected double pm;
 
 
-    public GeneticAlgorithm(int initialSize, CharacterType characterType){
+    public GeneticAlgorithm(int initialSize,int selectionsSize,int newGenerationSize,double pm, CharacterType characterType){
         this.characterType = characterType;
+        this.selectionsSize = selectionsSize;
+        this.newGenerationSize = newGenerationSize;
+        this.pm = pm;
         generation = 0;
 
         loadInitialPopulation(initialSize,characterType);
@@ -48,7 +56,7 @@ public abstract class GeneticAlgorithm {
         dataMaxFitness = new ArrayList<>();
         dataMinFitness = new ArrayList<>();
         generationList = new ArrayList<>();
-        generationList.add(generation);
+        generationList.add((double)generation);
         fcm.displayChartMatrix();
     }
 
@@ -57,7 +65,7 @@ public abstract class GeneticAlgorithm {
         dataMinFitness.add(fcm.getMinimumFitness(population));
         dataMaxFitness.add(fcm.getMaximumFitness(population));
         //NOT IMPLEMENTED YET
-        dataGeneticDiv.add(generation);
+        dataGeneticDiv.add((double)generation);
         //
         fcm.updateSeries("minFitness",generationList,dataMinFitness);
         fcm.updateSeries("maxFitness",generationList,dataMaxFitness);
@@ -85,5 +93,5 @@ public abstract class GeneticAlgorithm {
         return population;
     }
 
-    public abstract void start(double pm, int selectionQuantity, int newGenerationSize);
+    public abstract void start();
 }

@@ -8,14 +8,14 @@ import java.util.List;
 
 public class FillParent extends GeneticAlgorithm {
     public FillParent(int initialSize, int selectionsSize, int newGenerationSize, double pm, CharacterType characterType) {
-        super(initialSize, characterType);
+        super(initialSize,selectionsSize,newGenerationSize,pm, characterType);
     }
 
     @Override
-    public void start(double pm, int selectionsSize, int newGenerationSize) {
+    public void start() {
         List<Character> lastPopulation = new ArrayList<>(population);
         while(checkConverge.apply(lastPopulation,population)){
-            List<Character> selections = selection.apply(selectionsSize,population);
+            List<Character> selections = selection.select(population,generation);
             List<Character> newGeneration = new ArrayList<>();
             for(int i = 0; i < selectionsSize;i+=2){
                 int j = i+1;
