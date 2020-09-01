@@ -31,9 +31,11 @@ public class Boltzmann extends Selection{
         double avgExpList = expValList.stream().mapToDouble(v->v).average().getAsDouble();
         List<Double> fitness = new ArrayList<>();
         int n = population.size();
-        for(int i = 1; i<= population.size();i++){
+        for(int i = 0; i< population.size();i++){
             fitness.add(expValList.get(i)/avgExpList);
         }
+
+        System.out.println("fitness:"+fitness);
         decreaseTemperature(generation+1);
         System.out.println("inicio boltzman");
         return customRoulette(selectionSize,sortedPop,fitness);

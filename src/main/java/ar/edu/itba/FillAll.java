@@ -28,10 +28,16 @@ public class FillAll extends GeneticAlgorithm {
             int selectionSizeA = (int) (selectionsSize * pa);
             int selectionSizeB = selectionsSize-selectionSizeA;
             System.out.println("selectionSizeA: "+selectionSizeA+" selecitonSizeB: "+selectionSizeB);
-            List<Character> selectA = selectionA.select(selectionSizeA,population,generation);
+            List<Character> selectA = null,selectB = null;
+            if(selectionA != null){
+              selectA = selectionA.select(selectionSizeA,population,generation);
+            }
 
-            List<Character> selectB = selectionB.select(selectionSizeB,population,generation);
-            System.out.println("selectASize: "+selectA.size()+"selectBSize: "+selectB.size());
+            if(selectionB!= null){
+                selectB = selectionB.select(selectionSizeB,population,generation);
+            }
+
+
             List<Character> selections = new ArrayList<>();
             if(selectA != null){
                 selections.addAll(selectA);
@@ -73,7 +79,7 @@ public class FillAll extends GeneticAlgorithm {
                replaceB = replacementB.select(replacementSizeB,totalPopulation,generation);
 
             }
-            System.out.println("replaceASize:"+replaceA.size()+"replaceBSize:"+replaceB.size());
+
             if(replaceA != null){
                 population.addAll(replaceA);
             }

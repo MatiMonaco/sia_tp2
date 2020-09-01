@@ -38,7 +38,6 @@ public  abstract class Selection {
 
                 if(acum1 < random && random <= acum2){
                     selection.add(population.get(i+1));
-                    System.out.println("lo agrego");
                     k++;
                 }
             }

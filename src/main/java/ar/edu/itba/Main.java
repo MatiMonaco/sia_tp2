@@ -61,8 +61,8 @@ public class Main {
         }
 
 
-        GeneticAlgorithm fillAll = new FillAll(100,50,new Roulette(),new Elite(),new DeterministicTournament(2),new Elite(),200,0.3,0.5,0.5,
-                new TimeConvergence(30,System.currentTimeMillis()/1000),Crossing::twoPointCrossing,Mutation::genMutation,CharacterType.WARRIOR);
+        GeneticAlgorithm fillAll = new FillAll(300,150,new ProbabilisticTournament(0.5),null,new Elite(),new Ranking(),200,0.4,1,0.7,
+                new TimeConvergence(30,System.currentTimeMillis()/1000),Crossing::uniformCrossing,Mutation::complete,CharacterType.WARRIOR);
 
         fillAll.start();
 
