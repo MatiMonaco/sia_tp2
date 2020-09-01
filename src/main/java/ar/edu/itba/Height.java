@@ -20,7 +20,7 @@ public class Height implements Genome {
     @Override
     public void mutate() {
         Random r = new Random();
-       this.height = MIN_HEIGHT + (MAX_HEIGHT - MIN_HEIGHT) * r.nextDouble();
+        this.height = MIN_HEIGHT + (MAX_HEIGHT - MIN_HEIGHT) * r.nextDouble();
     }
 
     public double getHeight() {

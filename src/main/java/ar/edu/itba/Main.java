@@ -61,7 +61,7 @@ public class Main {
 //        equipment1.add(Database.getRandomEquipment("weapon"));
 //        equipment1.add(Database.getRandomEquipment("helmet"));
 //        equipment1.add(Database.getRandomEquipment("armor"));
-//        equipment1.add(Database.getRandomEquipment("glove"));
+//        equipment1.add(Database.getRandomEquipment("gloves"));
 //        equipment1.add(Database.getRandomEquipment("boots"));
 //        Character padre = new Character(CharacterType.ARCHER, new Height(1.8), equipment1);
 //
@@ -69,7 +69,7 @@ public class Main {
 //        equipment2.add(Database.getRandomEquipment("weapon"));
 //        equipment2.add(Database.getRandomEquipment("helmet"));
 //        equipment2.add(Database.getRandomEquipment("armor"));
-//        equipment2.add(Database.getRandomEquipment("glove"));
+//        equipment2.add(Database.getRandomEquipment("gloves"));
 //        equipment2.add(Database.getRandomEquipment("boots"));
 //        Character madre = new Character(CharacterType.ARCHER, new Height(1.78), equipment2);
 //
@@ -95,6 +95,30 @@ public class Main {
 //        }
         ////////////////////////
 
+        // testeo de mutation
+//        List<Equipment> equipment1 = new ArrayList<>();
+//        equipment1.add(Database.getRandomEquipment("weapon"));
+//        equipment1.add(Database.getRandomEquipment("helmet"));
+//        equipment1.add(Database.getRandomEquipment("armor"));
+//        equipment1.add(Database.getRandomEquipment("gloves"));
+//        equipment1.add(Database.getRandomEquipment("boots"));
+//        Character padre = new Character(CharacterType.ARCHER, new Height(1.8), equipment1);
+//
+//        System.out.println("BEFORE");
+//        List<Genome> gs1 = padre.getGenomes();
+//        for(Genome g: gs1){
+//            System.out.println(g);
+//        }
+//
+//        System.out.println("AFTER");
+//        Mutation.complete(padre, 0.5);
+//        gs1 = padre.getGenomes();
+//        for(Genome g: gs1){
+//            System.out.println(g);
+//        }
+        /////////////
+
+
         FitnessChartMatrix fcm = new FitnessChartMatrix();
         fcm.addChart("minFitness","Generation",0,"Minimum Fitness",0);
         fcm.addChart("maxFitness","Generation",0,"Maximum Fitness",0);
@@ -103,9 +127,9 @@ public class Main {
         fcm.displayChartMatrix();
 
         double j = 0;
-       List<Double> dataX, dataY;
-       dataX = new ArrayList<>();
-       dataY = new ArrayList<>();
+        List<Double> dataX, dataY;
+        dataX = new ArrayList<>();
+        dataY = new ArrayList<>();
         while (j < 100) {
             dataX.add(j);
             dataY.add(j);

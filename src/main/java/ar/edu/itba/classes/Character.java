@@ -78,6 +78,10 @@ public class Character implements Comparable<Character> {
         return fitness;
     }
 
+    public void mutateGen(int gen){
+        genomes.get(gen).mutate();
+    }
+
     public  double getRelativeFitness(double totalFitness){
         return getFitness()/totalFitness;
     }

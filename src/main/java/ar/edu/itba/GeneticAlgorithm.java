@@ -78,10 +78,10 @@ public abstract class GeneticAlgorithm {
         population = new ArrayList<>();
         for(int i = 0; i < initialSize;i++){
 
-            String types[] = {"helmet","armor","weapon","gloves","boots"};
+            String[] types = {"helmet","armor","weapon","gloves","boots"};
             List<Equipment> equipment = new ArrayList<>();
-            for(int j = 0; j < types.length;j++){
-                Equipment eq = Database.getRandomEquipment(types[j]);
+            for (String type : types) {
+                Equipment eq = Database.getRandomEquipment(type);
                 equipment.add(eq);
             }
             Character character = new Character(characterType,new Height(),equipment);
