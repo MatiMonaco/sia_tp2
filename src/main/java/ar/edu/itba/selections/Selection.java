@@ -1,6 +1,5 @@
 package ar.edu.itba.selections;
 
-import ar.edu.itba.TriFunction;
 import ar.edu.itba.classes.Character;
 
 import java.util.*;

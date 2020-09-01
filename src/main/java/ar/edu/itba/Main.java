@@ -2,6 +2,8 @@ package ar.edu.itba;
 
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
+import ar.edu.itba.selections.Elite;
+import ar.edu.itba.selections.Selection;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -117,6 +119,21 @@ public class Main {
 //            System.out.println(g);
 //        }
         /////////////
+        //testeo de selection
+
+//        GeneticAlgorithm fillAll = new FillAll(20,5,0.5,CharacterType.WARRIOR);
+//
+//        System.out.println(fillAll.getPopulation());
+//        Selection elite = new Elite(10);
+//        System.out.println(elite.select(fillAll.getPopulation(),0));
+
+
+
+
+
+
+
+
 
 
         FitnessChartMatrix fcm = new FitnessChartMatrix();
@@ -143,9 +160,7 @@ public class Main {
             fcm.repaint();
              j++;
         }
-        GeneticAlgorithm fillAll = new FillAll(10,5,10,0.2, CharacterType.WARRIOR);
 
-        System.out.println(fillAll.getPopulation().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
 
     }
 

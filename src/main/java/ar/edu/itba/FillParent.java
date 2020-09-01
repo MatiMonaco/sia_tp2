@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FillParent extends GeneticAlgorithm {
-    public FillParent(int initialSize, int selectionsSize, int newGenerationSize, double pm, CharacterType characterType) {
-        super(initialSize,selectionsSize,newGenerationSize,pm, characterType);
+    public FillParent(int initialSize, int newGenerationSize, double pm, CharacterType characterType) {
+        super(initialSize,newGenerationSize,pm, characterType);
     }
 
     @Override

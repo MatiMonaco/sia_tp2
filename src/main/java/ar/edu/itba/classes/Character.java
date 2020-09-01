@@ -61,8 +61,7 @@ public class Character implements Comparable<Character> {
     @Override
     public String toString() {
         return "Character{" +
-                "type=" + type +
-                ", fitness=" + getFitness() +
+                " fitness=" + getFitness() +
                 '}';
     }
 

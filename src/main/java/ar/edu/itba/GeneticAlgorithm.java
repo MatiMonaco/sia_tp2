@@ -32,9 +32,8 @@ public abstract class GeneticAlgorithm {
     protected double pm;
 
 
-    public GeneticAlgorithm(int initialSize,int selectionsSize,int newGenerationSize,double pm, CharacterType characterType){
+    public GeneticAlgorithm(int initialSize,int newGenerationSize,double pm, CharacterType characterType){
         this.characterType = characterType;
-        this.selectionsSize = selectionsSize;
         this.newGenerationSize = newGenerationSize;
         this.pm = pm;
         generation = 0;
