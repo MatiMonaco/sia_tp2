@@ -14,7 +14,7 @@ public  abstract class Selection {
 
 
     protected  List<Character> customRoulette(int selectionSize, List<Character> population, List<Double> fitness){
-
+        System.out.println("inicio custom roulette");
         double totalFitness = fitness.stream().mapToDouble(value -> value).sum();
         List<Double> relativeFitness =  fitness.stream().map(value -> value/totalFitness).collect(Collectors.toList());
         List<Double> accumulatedFitness = new ArrayList<>();
@@ -37,6 +37,7 @@ public  abstract class Selection {
                 }
             }
         }
+        System.out.println("return custom roullete");
         return  selection;
 
 

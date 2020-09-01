@@ -4,8 +4,7 @@ import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
 import ar.edu.itba.convergences.Convergence;
 import ar.edu.itba.convergences.TimeConvergence;
-import ar.edu.itba.selections.Elite;
-import ar.edu.itba.selections.Selection;
+import ar.edu.itba.selections.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -121,43 +120,13 @@ public class Main {
 //            System.out.println(g);
 //        }
         /////////////
-        //testeo de selection
 
-//        GeneticAlgorithm fillAll = new FillAll(20,5,0.5,CharacterType.WARRIOR);
-//
-//        System.out.println(fillAll.getPopulation());
-//        Selection elite = new Elite(10);
-//        System.out.println(elite.select(fillAll.getPopulation(),0));
+        GeneticAlgorithm fillAll = new FillAll(100,50,new Roulette(),new Universal(),new Elite(),new Ranking(),80,0.3,0.5,0.5,
+                new TimeConvergence(30,System.currentTimeMillis()/1000),Crossing::uniformCrossing,Mutation::complete,CharacterType.WARRIOR);
+
+        fillAll.start();
 
 
-
-/*
-
-        FitnessChartMatrix fcm = new FitnessChartMatrix();
-        fcm.addChart("minFitness","Generation",0,"Minimum Fitness",0);
-        fcm.addChart("maxFitness","Generation",0,"Maximum Fitness",0);
-        fcm.addChart("avgFitness","Generation",0,"Average Fitness",0);
-        fcm.addChart("divGen","Generation",0,"Genetic Divergence",0);
-        fcm.displayChartMatrix();
-
-        double j = 0;
-        List<Double> dataX, dataY;
-        dataX = new ArrayList<>();
-        dataY = new ArrayList<>();
-        while (j < 100) {
-            dataX.add(j);
-            dataY.add(j);
-            Thread.sleep(50);
-
-            fcm.updateSeries("minFitness",dataX,dataY);
-            fcm.updateSeries("maxFitness",dataX,dataY);
-            fcm.updateSeries("avgFitness",dataX,dataY);
-            fcm.updateSeries("divGen",dataX,dataY);
-
-            fcm.repaint();
-             j++;
-        }
-*/
 
 
     }

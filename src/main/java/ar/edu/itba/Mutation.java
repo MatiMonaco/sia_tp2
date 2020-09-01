@@ -7,7 +7,7 @@ import java.util.function.DoublePredicate;
 
 public class Mutation {
 
-    public static void genMutation(Character character, Double pm){
+    public static Void genMutation(Character character, Double pm){
         Random r = new Random();
         int gen = r.nextInt(character.getGenomes().size()); // which gen
         System.out.println("gen number: " + gen);
@@ -16,9 +16,10 @@ public class Mutation {
             System.out.println("mutating...");
             character.mutateGen(gen);
         }
+        return null;
     }
 
-    public static void multiGenMutation(Character character, Double pm){
+    public static Void multiGenMutation(Character character, Double pm){
         Random r = new Random();
         int gens = r.nextInt(character.getGenomes().size()); // how many gens
         System.out.println("mutating " + gens + " gens");
@@ -29,9 +30,10 @@ public class Mutation {
                 character.mutateGen(g);
             }
         }
+        return null;
     }
 
-    public static void multiGenUniform(Character character, Double pm){
+    public static Void multiGenUniform(Character character, Double pm){
         Random r = new Random();
 
         for(int i = 0; i < character.getGenomes().size(); i++){
@@ -40,9 +42,10 @@ public class Mutation {
                 character.mutateGen(i);
             }
         }
+        return null;
     }
 
-    public static void complete(Character character, Double pm){
+    public static Void complete(Character character, Double pm){
         Random r = new Random();
 
         if (r.nextDouble() < pm){
@@ -50,5 +53,7 @@ public class Mutation {
                 character.mutateGen(i);
             }
         }
+        return null;
     }
+
 }

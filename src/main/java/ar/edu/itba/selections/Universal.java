@@ -12,6 +12,7 @@ public class Universal extends Selection {
 
     @Override
     public List<Character> select(int selectionSize, List<Character> population,int generation) {
+        System.out.println("Inicio select universal");
         if(selectionSize == 0){
             return null;
         }
@@ -37,6 +38,7 @@ public class Universal extends Selection {
                 }
             }
         }
+        System.out.println("return select universal");
         return  selection;
     }
 

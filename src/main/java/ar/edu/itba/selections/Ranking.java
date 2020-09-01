@@ -11,6 +11,7 @@ public class Ranking extends Selection {
 
     @Override
     public List<Character> select(int selectionSize,List<Character> population,int generation) {
+        System.out.println("inicio select roulette");
         if(selectionSize == 0){
             return null;
         }
@@ -20,6 +21,7 @@ public class Ranking extends Selection {
         for(int i = 1; i<= population.size();i++){
             fitness.add((double)((n-i)/n));
         }
+        System.out.println("return select roulette");
         return customRoulette(selectionSize,sortedPop,fitness);
     }
 }

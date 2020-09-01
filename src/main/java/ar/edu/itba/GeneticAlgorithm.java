@@ -2,6 +2,7 @@ package ar.edu.itba;
 
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
+import ar.edu.itba.convergences.Convergence;
 import ar.edu.itba.selections.Selection;
 
 import java.util.ArrayList;
@@ -14,14 +15,13 @@ public abstract class GeneticAlgorithm {
 
     protected List<Character> population;
     protected CharacterType characterType;
-    protected BiFunction<List<Character>,List<Character>,Boolean> checkConverge;
+    protected Convergence convergence;
     protected Selection selectionA,selectionB;
     protected BiFunction<Character,Character,List<Character>> crossing;
     protected BiFunction<Character,Double,Void> mutate;
     protected Selection replacementA,replacementB;
-
+    protected FitnessChartMatrix fcm;
     protected int generation;
-    private  FitnessChartMatrix fcm;
     private List<Double> dataMaxFitness;
     private List<Double> dataMinFitness;
     private List<Double> dataAvgFitness;
@@ -33,7 +33,7 @@ public abstract class GeneticAlgorithm {
     protected double pm,pa,pb;
 
 
-    public GeneticAlgorithm(int initialSize,int selectionsSize,Selection selectionA,Selection selectionB,Selection replacementA,Selection replacementB,int newGenerationSize,double pm,double pa,double pb, CharacterType characterType){
+    public GeneticAlgorithm(int initialSize,int selectionsSize,Selection selectionA,Selection selectionB,Selection replacementA,Selection replacementB,int newGenerationSize,double pm,double pa,double pb,Convergence convergence,BiFunction<Character,Character,List<Character>> crossing,BiFunction<Character,Double,Void> mutate, CharacterType characterType){
         this.characterType = characterType;
         this.selectionsSize = selectionsSize;
         this.selectionA = selectionA;
@@ -42,11 +42,13 @@ public abstract class GeneticAlgorithm {
         this.replacementB = replacementB;
         this.newGenerationSize = newGenerationSize;
         this.initialSize = initialSize;
+        this.convergence = convergence;
+        this.crossing = crossing;
+        this.mutate  =mutate;
         this.pm = pm;
         this.pa = pa;
         this.pb = pb;
         generation = 0;
-
         loadInitialPopulation(initialSize,characterType);
         initializeCharts();
 
@@ -65,13 +67,14 @@ public abstract class GeneticAlgorithm {
         dataMinFitness = new ArrayList<>();
         generationList = new ArrayList<>();
         generationList.add((double)generation);
-        fcm.displayChartMatrix();
+
     }
 
     protected void updateCharts(List<Character> population){
-        dataAvgFitness.add(fcm.getAverageFitness(population));
-        dataMinFitness.add(fcm.getMinimumFitness(population));
-        dataMaxFitness.add(fcm.getMaximumFitness(population));
+        System.out.println("Updating charts");
+        dataAvgFitness.add(Character.getAverageFitness(population));
+        dataMinFitness.add(Character.getMinimumFitness(population));
+        dataMaxFitness.add(Character.getMaximumFitness(population));
         //NOT IMPLEMENTED YET
         dataGeneticDiv.add((double)generation);
         //

@@ -2,20 +2,26 @@ package ar.edu.itba;
 
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
+import ar.edu.itba.convergences.Convergence;
 import ar.edu.itba.selections.Selection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class FillParent extends GeneticAlgorithm {
-    public FillParent(int initialSize, int selectionSize, Selection selectionA, Selection selectionB, Selection replacementA, Selection replacementB,int newGenerationSize, double pm, double pa, double pb, CharacterType characterType) {
-        super(initialSize,selectionSize,selectionA,selectionB,replacementA,replacementB,newGenerationSize,pm,pa,pb ,characterType);
+    public FillParent(int initialSize, int selectionSize, Selection selectionA, Selection selectionB, Selection replacementA, Selection replacementB, int newGenerationSize,
+                      double pm, double pa, double pb, Convergence convergence,
+                      BiFunction<Character,Character,List<Character>> crossing, BiFunction<Character,Double,Void> mutate, CharacterType characterType) {
+        super(initialSize,selectionSize,selectionA,selectionB,replacementA,replacementB,newGenerationSize,pm,pa,pb ,convergence,crossing,mutate,characterType);
     }
 
     @Override
     public void start() {
+        fcm.displayChartMatrix();
         List<Character> lastPopulation = new ArrayList<>(population);
-        while(checkConverge.apply(lastPopulation,population)){
+        while(!convergence.checkConvergence(lastPopulation,population,generation)){
+            System.out.println("While");
 
             //selection
             int selectionSizeA = (int) (selectionsSize * pa);
@@ -81,6 +87,7 @@ public class FillParent extends GeneticAlgorithm {
                 }
                 population.addAll(newGeneration);
                 generation++;
+                System.out.println("generation: "+generation);
             }
         }
     }

@@ -16,6 +16,7 @@ public class DeterministicTournament  extends Selection{
 
     @Override
     public List<Character> select( int selectionSize,List<Character> population,int generation) {
+        System.out.println("inicio det tournament");
         if(selectionSize == 0){
             return null;
         }
@@ -38,6 +39,7 @@ public class DeterministicTournament  extends Selection{
             selection.add(winner);
             k++;
         }
+        System.out.println("return det tournament");
         return selection;
     }
 }

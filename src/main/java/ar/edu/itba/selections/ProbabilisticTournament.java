@@ -15,6 +15,7 @@ public class ProbabilisticTournament extends Selection {
 
     @Override
     public List<Character> select(int selectionSize, List<Character> population,int generation) {
+        System.out.println("inicio prob tournament");
         if(selectionSize == 0){
             return null;
         }
@@ -44,6 +45,7 @@ public class ProbabilisticTournament extends Selection {
             selection.add(winner);
             k++;
         }
+        System.out.println("return prob tournament");
         return selection;
     }
 }
