@@ -75,10 +75,14 @@ public class Equipment implements Genome{
         return health;
     }
 
+    public String getName() {
+        return name;
+    }
 
     @Override
     public void mutate() {
         Equipment mutation = Database.getRandomEquipment(type);
+        this.name = mutation.getName();
         this.strength = mutation.getStrength();
         this.agility = mutation.getAgility();
         this.health = mutation.getHealth();
