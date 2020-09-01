@@ -19,27 +19,16 @@ public class Crossing {
         Random r = new Random();
         int p = r.nextInt(parent1.getGenomes().size() + 1);
         System.out.printf("VALOR DE P: %d ------------------", p);
-        int i = 0;
-        List<Genome> genomes1 = new ArrayList<>();
-        List<Genome> genomes2 = new ArrayList<>();
 
-        for (Genome g: parent1.getGenomes()) {
-            if (i < p){
-                genomes1.add(g);
-            }else{
-                genomes2.add(g);
-            }
-            i++;
-        }
+        List<Genome> parentGens1 = parent1.getGenomes();
+        List<Genome> parentGens2 = parent2.getGenomes();
 
-        i = 0;
-        for (Genome g: parent2.getGenomes()) {
-            if (i < p){
-                genomes2.add(g);
-            }else{
-                genomes1.add(g);
-            }
-            i++;
+        List<Genome> genomes1 = new ArrayList<>(parentGens1);
+        List<Genome> genomes2 = new ArrayList<>(parentGens2);
+
+        for (int i = p; i < parentGens1.size(); i++) {
+            genomes1.set(i, parentGens2.get(i));
+            genomes2.set(i, parentGens1.get(i));
         }
 
         ArrayList<Character> toRet = new ArrayList<>();
@@ -55,33 +44,21 @@ public class Crossing {
         System.out.printf("VALOR DE P1: %d ------------------", p1);
         System.out.printf("VALOR DE P2: %d ------------------", p2);
 
-        List<Genome> genomes1 = new ArrayList<>();
-        List<Genome> genomes2 = new ArrayList<>();
+        List<Genome> parentGens1 = parent1.getGenomes();
+        List<Genome> parentGens2 = parent2.getGenomes();
 
-        if (p1>=p2){
+        List<Genome> genomes1 = new ArrayList<>(parentGens1);
+        List<Genome> genomes2 = new ArrayList<>(parentGens2);
+
+        if (p1>p2){
             int aux=p1;
             p1=p2;
             p2=p1;
         }
 
-        int i = 0;
-        for(Genome g : parent1.getGenomes()){
-            if (!(i >= p1 && i <= p2)){
-                genomes1.add(g);
-            }else{
-                genomes2.add(g);
-            }
-            i++;
-        }
-
-        i = 0;
-        for(Genome g : parent2.getGenomes()){
-            if (!(i >= p1 && i <= p2)){
-                genomes2.add(g);
-            }else{
-                genomes1.add(g);
-            }
-            i++;
+        for (int i = p1; i < parentGens1.size() && i < p2; i++) {
+            genomes1.set(i, parentGens2.get(i));
+            genomes2.set(i, parentGens1.get(i));
         }
 
         ArrayList<Character> toRet = new ArrayList<>();

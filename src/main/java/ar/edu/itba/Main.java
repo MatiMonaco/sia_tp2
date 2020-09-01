@@ -60,70 +60,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        // Testeo de crossing
-//        List<Equipment> equipment1 = new ArrayList<>();
-//        equipment1.add(Database.getRandomEquipment("weapon"));
-//        equipment1.add(Database.getRandomEquipment("helmet"));
-//        equipment1.add(Database.getRandomEquipment("armor"));
-//        equipment1.add(Database.getRandomEquipment("gloves"));
-//        equipment1.add(Database.getRandomEquipment("boots"));
-//        Character padre = new Character(CharacterType.ARCHER, new Height(1.8), equipment1);
-//
-//        List<Equipment> equipment2 = new ArrayList<>();
-//        equipment2.add(Database.getRandomEquipment("weapon"));
-//        equipment2.add(Database.getRandomEquipment("helmet"));
-//        equipment2.add(Database.getRandomEquipment("armor"));
-//        equipment2.add(Database.getRandomEquipment("gloves"));
-//        equipment2.add(Database.getRandomEquipment("boots"));
-//        Character madre = new Character(CharacterType.ARCHER, new Height(1.78), equipment2);
-//
-//        List<Character> hijes = Crossing.uniformCrossing(padre, madre);
-//
-//        System.out.println("PADRES--------------------");
-//        List<Genome> gs1 = padre.getGenomes();
-//        for(Genome g: gs1){
-//            System.out.println(g);
-//        }
-//        List<Genome> gs2 = madre.getGenomes();
-//        for(Genome g: gs2){
-//            System.out.println(g);
-//        }
-//        System.out.println("HIJOS---------------------");
-//        int i = 1;
-//        for (Character c : hijes) {
-//            System.out.printf("HIJO NUMERO %d\n", i++);
-//            List<Genome> gs = c.getGenomes();
-//            for(Genome g: gs){
-//                System.out.println(g);
-//            }
-//        }
-        ////////////////////////
 
-        // testeo de mutation
-//        List<Equipment> equipment1 = new ArrayList<>();
-//        equipment1.add(Database.getRandomEquipment("weapon"));
-//        equipment1.add(Database.getRandomEquipment("helmet"));
-//        equipment1.add(Database.getRandomEquipment("armor"));
-//        equipment1.add(Database.getRandomEquipment("gloves"));
-//        equipment1.add(Database.getRandomEquipment("boots"));
-//        Character padre = new Character(CharacterType.ARCHER, new Height(1.8), equipment1);
-//
-//        System.out.println("BEFORE");
-//        List<Genome> gs1 = padre.getGenomes();
-//        for(Genome g: gs1){
-//            System.out.println(g);
-//        }
-//
-//        System.out.println("AFTER");
-//        Mutation.complete(padre, 0.5);
-//        gs1 = padre.getGenomes();
-//        for(Genome g: gs1){
-//            System.out.println(g);
-//        }
-        /////////////
-
-        GeneticAlgorithm fillAll = new FillAll(300,100,new DeterministicTournament(50),new DeterministicTournament(50),new DeterministicTournament(50),new DeterministicTournament(50),80,0.5,0.5,0.5,
-                new GenerationQuantityConvergence(80),Crossing::uniformCrossing,Mutation::complete,CharacterType.WARRIOR);
+        GeneticAlgorithm fillAll = new FillAll(100,50,new Roulette(),new Elite(),new DeterministicTournament(2),new Elite(),200,0.3,0.5,0.5,
+                new TimeConvergence(30,System.currentTimeMillis()/1000),Crossing::twoPointCrossing,Mutation::genMutation,CharacterType.WARRIOR);
 
         fillAll.start();
 
