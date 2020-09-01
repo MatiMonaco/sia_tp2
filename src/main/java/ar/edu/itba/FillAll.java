@@ -19,15 +19,18 @@ public class FillAll extends GeneticAlgorithm {
 
     @Override
     public void start() {
-        fcm.displayChartMatrix();
+
         List<Character> lastPopulation = new ArrayList<>(population);
         while(!convergence.checkConvergence(lastPopulation,population,generation)){
             System.out.println("While");
             //selection
             int selectionSizeA = (int) (selectionsSize * pa);
             int selectionSizeB = selectionsSize-selectionSizeA;
+            System.out.println("selectionSizeA: "+selectionSizeA+" selecitonSizeB: "+selectionSizeB);
             List<Character> selectA = selectionA.select(selectionSizeA,population,generation);
+
             List<Character> selectB = selectionB.select(selectionSizeB,population,generation);
+            System.out.println("selectASize: "+selectA.size()+"selectBSize: "+selectB.size());
             List<Character> selections = new ArrayList<>();
             if(selectA != null){
                 selections.addAll(selectA);
@@ -38,7 +41,8 @@ public class FillAll extends GeneticAlgorithm {
 
             //crossing
             List<Character> newGeneration = new ArrayList<>();
-            for(int i = 0; i < selectionsSize-1;i+=2){
+            System.out.println("selectionSize" +selectionsSize+"selections size: "+selections.size());
+            for(int i = 0; i < selectionsSize;i+=2){
                 int j = i+1;
 //                if(i == selectionsSize-1){
 //                    j = i;
@@ -68,6 +72,7 @@ public class FillAll extends GeneticAlgorithm {
                replaceB = replacementB.select(replacementSizeB,totalPopulation,generation);
 
             }
+            System.out.println("replaceASize:"+replaceA.size()+"replaceBSize:"+replaceB.size());
             if(replaceA != null){
                 population.addAll(replaceA);
             }

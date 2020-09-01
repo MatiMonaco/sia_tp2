@@ -34,8 +34,10 @@ public  abstract class Selection {
                 double acum2 =accumulatedFitness.get(i+1);
                 if(acum1 < random && random <= acum2){
                     selection.add(population.get(i+1));
+                    k++;
                 }
             }
+
         }
         System.out.println("return custom roullete");
         return  selection;

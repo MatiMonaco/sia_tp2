@@ -18,7 +18,7 @@ public class FillParent extends GeneticAlgorithm {
 
     @Override
     public void start() {
-        fcm.displayChartMatrix();
+
         List<Character> lastPopulation = new ArrayList<>(population);
         while(!convergence.checkConvergence(lastPopulation,population,generation)){
             System.out.println("While");

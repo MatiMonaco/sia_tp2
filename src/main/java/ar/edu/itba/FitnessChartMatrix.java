@@ -29,7 +29,7 @@ public class FitnessChartMatrix {
         XYSeries series = chart.addSeries(name, new double[]{0}, new double[]{0});
         series.setLineColor(XChartSeriesColors.BLUE);
         series.setMarkerColor(Color.RED);
-        series.setMarker(SeriesMarkers.CIRCLE);
+        series.setMarker(SeriesMarkers.NONE);
         series.setLineStyle(SeriesLines.DOT_DOT);
         charts.put(name,chart);
     }
@@ -41,7 +41,7 @@ public class FitnessChartMatrix {
     public void displayChartMatrix(){
         List<XYChart> list = new ArrayList<>();
         charts.values().forEach(value-> list.add(value));
-
+        System.out.println("Chart list:"+list);
         sw = new SwingWrapper<>(list);
         sw.displayChartMatrix();
     }

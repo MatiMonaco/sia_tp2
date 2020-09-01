@@ -131,6 +131,7 @@ public class Crossing {
         List<Genome> genomes2 = new ArrayList<>(parentGens2);
 
         for (int i = 0; i < parent1.getGenomes().size(); i++) {
+            System.out.println("i:"+i);
             double prob = r.nextDouble();
             System.out.printf("prob: %g --- idx: %d", prob, i);
             if (prob < P){
@@ -138,7 +139,7 @@ public class Crossing {
                 genomes2.set(i, parentGens1.get(i));
             }
         }
-
+        System.out.println("salgo del for");
         ArrayList<Character> toRet = new ArrayList<>();
         toRet.add(new Character(parent1.getType(), genomes1));
         toRet.add(new Character(parent1.getType(), genomes2));

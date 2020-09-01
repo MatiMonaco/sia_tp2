@@ -25,27 +25,27 @@ public class Database {
         String name = getRandomName();
         switch (type){
             case "weapon":
-                System.out.println("getting weapon");
+
                 eq = weapons.get(name);
                 eq.type = "weapon";
                 break;
             case "helmet":
-                System.out.println("getting helmet");
+
                 eq = helmets.get(name);
                 eq.type = "helmet";
                 break;
             case "armor":
-                System.out.println("getting armor");
+
                 eq = armor.get(name);
                 eq.type = "armor";
                 break;
             case "gloves":
-                System.out.println("getting glove");
+
                 eq = gloves.get(name);
                 eq.type = "gloves";
                 break;
             case "boots":
-                System.out.println("getting boots");
+
                 eq = boots.get(name);
                 eq.type = "boots";
                 break;
@@ -59,7 +59,7 @@ public class Database {
     public static String getRandomName(){
 
         String name = String.valueOf((int)(1000000 * Math.random()));
-        System.out.println("random name:"+name);
+
         return name;
     }
 

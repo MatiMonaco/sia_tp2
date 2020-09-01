@@ -121,7 +121,7 @@ public class Main {
 //        }
         /////////////
 
-        GeneticAlgorithm fillAll = new FillAll(100,50,new Roulette(),new Universal(),new Elite(),new Ranking(),80,0.3,0.5,0.5,
+        GeneticAlgorithm fillAll = new FillAll(100,50,new Roulette(),new Roulette(),new Roulette(),new Roulette(),80,0.3,0.5,0.5,
                 new TimeConvergence(30,System.currentTimeMillis()/1000),Crossing::uniformCrossing,Mutation::complete,CharacterType.WARRIOR);
 
         fillAll.start();

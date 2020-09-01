@@ -66,7 +66,8 @@ public abstract class GeneticAlgorithm {
         dataMaxFitness = new ArrayList<>();
         dataMinFitness = new ArrayList<>();
         generationList = new ArrayList<>();
-        generationList.add((double)generation);
+        fcm.displayChartMatrix();
+
 
     }
 
