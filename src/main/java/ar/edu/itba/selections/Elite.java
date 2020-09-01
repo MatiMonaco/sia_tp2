@@ -8,12 +8,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Elite extends Selection {
-    public Elite(int selectionSize) {
-        super(selectionSize);
-    }
+
 
     @Override
-    public List<Character> select( List<Character> population,int generation) {
+    public List<Character> select(int selectionSize, List<Character> population,int generation) {
+        if(selectionSize == 0){
+            return null;
+        }
         if(population.isEmpty()){
             return null;
         }

@@ -9,13 +9,16 @@ public class DeterministicTournament  extends Selection{
 
     private int M;
 
-    public DeterministicTournament(int selectionSize,int m) {
-        super(selectionSize);
+    public DeterministicTournament(int m) {
+
         M = m;
     }
 
     @Override
-    public List<Character> select( List<Character> population,int generation) {
+    public List<Character> select( int selectionSize,List<Character> population,int generation) {
+        if(selectionSize == 0){
+            return null;
+        }
         int k = 0;
         int size = population.size();
         List<Character> selection = new ArrayList<>();

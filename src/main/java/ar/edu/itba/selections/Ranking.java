@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Ranking extends Selection {
-    public Ranking(int selectionSize) {
-        super(selectionSize);
-    }
 
     @Override
-    public List<Character> select(List<Character> population,int generation) {
+    public List<Character> select(int selectionSize,List<Character> population,int generation) {
+        if(selectionSize == 0){
+            return null;
+        }
         List<Character> sortedPop = population.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         List<Double> fitness = new ArrayList<>();
         int n = population.size();

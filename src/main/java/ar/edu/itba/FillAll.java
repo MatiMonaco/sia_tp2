@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FillAll extends GeneticAlgorithm {
-    public FillAll(int initialSize, int newGenerationSize, double pm, CharacterType characterType) {
-        super(initialSize,newGenerationSize,pm,characterType);
+    public FillAll(int initialSize,int selectionSize,int newGenerationSize, double pm,double pa,double pb, CharacterType characterType) {
+        super(initialSize,selectionSize,newGenerationSize,pm,pa,pb,characterType);
 
     }
 
@@ -17,8 +17,20 @@ public class FillAll extends GeneticAlgorithm {
 
         List<Character> lastPopulation = new ArrayList<>(population);
         while(checkConverge.apply(lastPopulation,population)){
-            List<Character> selections = selection.select(population,generation);
+            //selection
+            int selectionSizeA = (int) (selectionsSize * pa);
+            int selectionSizeB = selectionsSize-selectionSizeA;
+            List<Character> selectA = selectionA.select(selectionSizeA,population,generation);
+            List<Character> selectB = selectionB.select(selectionSizeB,population,generation);
+            List<Character> selections = new ArrayList<>();
+            if(selectA != null){
+                selections.addAll(selectA);
+            }
+            if(selectB != null){
+                selections.addAll(selectB);
+            }
 
+            //crossing
             List<Character> newGeneration = new ArrayList<>();
             for(int i = 0; i < selectionsSize-1;i+=2){
                 int j = i+1;
@@ -26,15 +38,31 @@ public class FillAll extends GeneticAlgorithm {
 //                    j = i;
 //                }
                 List<Character> children = crossing.apply(selections.get(i),selections.get(j));
+                //mutation
                 children.forEach(child->mutate.apply(child,pm));
                 newGeneration.addAll(children);
             }
 
+
+            lastPopulation = new ArrayList<>(population);
+
+            //replacement
             List<Character> totalPopulation = new ArrayList<>();
             totalPopulation.addAll(population);
             totalPopulation.addAll(newGeneration);
-            lastPopulation = new ArrayList<>(population);
-            population = replacement.apply(newGenerationSize,totalPopulation);
+            int replacementSizeA = (int) (newGenerationSize * pb);
+            int replacementSizeB = newGenerationSize-replacementSizeA;
+
+            List<Character> replacementA = selectionA.select(replacementSizeA,newGeneration,generation);
+            List<Character> replacementB = selectionB.select(replacementSizeB,newGeneration,generation);
+            population = new ArrayList<>();
+            if(replacementA != null){
+                population.addAll(replacementA);
+            }
+            if(replacementB !=null){
+                population.addAll(replacementB);
+            }
+
             generation++;
             generationList.add(((double)generation));
             updateCharts(population);

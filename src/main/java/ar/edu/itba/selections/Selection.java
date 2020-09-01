@@ -8,13 +8,8 @@ import java.util.stream.Collectors;
 
 public  abstract class Selection {
 
-    protected int selectionSize;
 
-    public Selection(int selectionSize) {
-        this.selectionSize = selectionSize;
-    }
-
-    public abstract List<Character> select( List<Character> population,int generation);
+    public abstract List<Character> select(int selectionSize, List<Character> population,int generation);
 
 
 

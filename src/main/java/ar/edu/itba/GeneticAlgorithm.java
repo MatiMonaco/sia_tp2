@@ -15,10 +15,10 @@ public abstract class GeneticAlgorithm {
     protected List<Character> population;
     protected CharacterType characterType;
     protected BiFunction<List<Character>,List<Character>,Boolean> checkConverge;
-    protected Selection selection;
+    protected Selection selectionA,selectionB;
     protected BiFunction<Character,Character,List<Character>> crossing;
     protected BiFunction<Character,Double,Void> mutate;
-    protected BiFunction<Integer,List<Character>,List<Character>> replacement;
+    protected Selection replacementA,replacementB;
 
     protected int generation;
     private  FitnessChartMatrix fcm;
@@ -29,13 +29,18 @@ public abstract class GeneticAlgorithm {
     protected List<Double> generationList;
     protected int selectionsSize;
     protected int newGenerationSize;
-    protected double pm;
+    protected int initialSize;
+    protected double pm,pa,pb;
 
 
-    public GeneticAlgorithm(int initialSize,int newGenerationSize,double pm, CharacterType characterType){
+    public GeneticAlgorithm(int initialSize,int selectionsSize,int newGenerationSize,double pm,double pa,double pb, CharacterType characterType){
         this.characterType = characterType;
+        this.selectionsSize = selectionsSize;
         this.newGenerationSize = newGenerationSize;
+        this.initialSize = initialSize;
         this.pm = pm;
+        this.pa = pa;
+        this.pb = pb;
         generation = 0;
 
         loadInitialPopulation(initialSize,characterType);

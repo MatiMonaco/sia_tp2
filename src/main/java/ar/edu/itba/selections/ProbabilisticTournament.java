@@ -8,13 +8,16 @@ import java.util.List;
 public class ProbabilisticTournament extends Selection {
     private double threshold;
 
-    public ProbabilisticTournament(int selectionSize,double threshold) {
-        super(selectionSize);
+    public ProbabilisticTournament(double threshold) {
+
         this.threshold = threshold;
     }
 
     @Override
-    public List<Character> select( List<Character> population,int generation) {
+    public List<Character> select(int selectionSize, List<Character> population,int generation) {
+        if(selectionSize == 0){
+            return null;
+        }
         if(threshold < 0.5 || threshold >1){
             throw new IllegalArgumentException();
         }

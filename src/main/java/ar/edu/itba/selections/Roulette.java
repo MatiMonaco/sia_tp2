@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Roulette extends Selection {
-    public Roulette(int selectionSize) {
-        super(selectionSize);
-    }
 
     @Override
-    public List<Character> select(List<Character> population,int generation) {
+    public List<Character> select(int selectionSize,List<Character> population,int generation) {
+        if(selectionSize == 0){
+            return null;
+        }
         double totalFitness = population.stream().mapToDouble(Character::getFitness).sum();
         List<Double> relativeFitness =  population.stream().map(value -> value.getRelativeFitness(totalFitness)).collect(Collectors.toList());
         List<Double> accumulatedFitness = new ArrayList<>();

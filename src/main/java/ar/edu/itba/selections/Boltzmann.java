@@ -13,15 +13,18 @@ public class Boltzmann extends Selection{
     private  double initialTemp;
     private double finalTemp;
 
-    public Boltzmann(int selectionSize,double initialTemp, double finalTemp) {
-        super(selectionSize);
+    public Boltzmann(double initialTemp, double finalTemp) {
+
         this.temperature = initialTemp;
         this.initialTemp = initialTemp;
         this.finalTemp = finalTemp;
     }
 
     @Override
-    public List<Character> select( List<Character> population,int generation) {
+    public List<Character> select(int selectionSize, List<Character> population,int generation) {
+        if(selectionSize == 0){
+            return null;
+        }
         List<Character> sortedPop = population.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         List<Double> expValList =  population.stream().map(this::expVal).collect(Collectors.toList());
         double avgExpList = expValList.stream().mapToDouble(v->v).average().getAsDouble();
