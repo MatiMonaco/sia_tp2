@@ -84,9 +84,7 @@ public class Character implements Comparable<Character> {
     }
 
     public double getFitness(){
-        if(fitness == null){
-            fitness = type.getBaseAttackM() * getAttack() + type.getBaseDefenseM() * getDefense();
-        }
+        fitness = type.getBaseAttackM() * getAttack() + type.getBaseDefenseM() * getDefense();
         return fitness;
     }
 
@@ -161,7 +159,7 @@ public class Character implements Comparable<Character> {
 
     private double getDefenseModifier(){
         double height = ((Height)genomes.get(0)).getHeight();
-        return 1.9-Math.pow(2.5*height-4.16,4) + Math.pow(2.5*height-4.16,2) + 3*height/10;
+        return 1.9+Math.pow(2.5*height-4.16,4) - Math.pow(2.5*height-4.16,2) + (3*height)/10;
     }
 
     protected double getAttack(){

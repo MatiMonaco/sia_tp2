@@ -3,7 +3,7 @@ package ar.edu.itba;
 import java.util.Objects;
 import java.util.Random;
 
-public class Height implements Genome {
+public class Height implements Genome, Cloneable {
 
     private double height;
     public static final double MAX_HEIGHT = 2.0;
@@ -49,5 +49,9 @@ public class Height implements Genome {
         return "Height{" +
                 "height=" + height +
                 '}';
+    }
+
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
     }
 }

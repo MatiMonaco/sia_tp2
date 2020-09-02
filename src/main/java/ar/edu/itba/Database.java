@@ -58,9 +58,7 @@ public class Database {
 
     public static String getRandomName(){
 
-        String name = String.valueOf((int)(1000000 * Math.random()));
-
-        return name;
+        return String.valueOf((int)(20 * Math.random()));
     }
 
     public static void load(){

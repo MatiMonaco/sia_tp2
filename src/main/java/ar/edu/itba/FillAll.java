@@ -6,6 +6,8 @@ import ar.edu.itba.convergences.Convergence;
 import ar.edu.itba.selections.Selection;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -22,38 +24,28 @@ public class FillAll extends GeneticAlgorithm {
 
         List<Character> lastPopulation = new ArrayList<>(population);
         while(!convergence.checkConvergence(lastPopulation,population,generation)){
-            System.out.println("gen "+generation+": "+population);
-            System.out.println("While");
+//        while(generation<20){
+//            System.out.println("While");
             //selection
             int selectionSizeA = (int) (selectionsSize * pa);
             int selectionSizeB = selectionsSize-selectionSizeA;
-            System.out.println("selectionSizeA: "+selectionSizeA+" selecitonSizeB: "+selectionSizeB);
-            List<Character> selectA = null,selectB = null;
-            if(selectionA != null){
-              selectA = selectionA.select(selectionSizeA,population,generation);
-            }
+//            System.out.println("selectionSizeA: "+selectionSizeA+" selecitonSizeB: "+selectionSizeB);
+            List<Character> selectA = selectionA.select(selectionSizeA,population,generation);
 
-            if(selectionB!= null){
-                selectB = selectionB.select(selectionSizeB,population,generation);
-            }
-
-
+            List<Character> selectB = selectionB.select(selectionSizeB,population,generation);
+//            System.out.println("selectASize: "+selectA.size()+"selectBSize: "+selectB.size());
             List<Character> selections = new ArrayList<>();
-            if(selectA != null){
-                selections.addAll(selectA);
-            }
-            if(selectB != null){
-                selections.addAll(selectB);
-            }
+            selections.addAll(selectA);
+            selections.addAll(selectB);
 
             //crossing
             List<Character> newGeneration = new ArrayList<>();
-            System.out.println("selectionSize" +selectionsSize+"selections size: "+selections.size());
+//            System.out.println("selectionSize" +selectionsSize+"selections size: "+selections.size());
             for(int i = 0; i < selectionsSize;i+=2){
                 int j = i+1;
-//                if(i == selectionsSize-1){
-//                    j = i;
-//                }
+                if(j == selectionsSize){
+                    j = i;
+                }
                 List<Character> children = crossing.apply(selections.get(i),selections.get(j));
                 //mutation
                 children.forEach(child->mutate.apply(child,pm));
@@ -79,13 +71,9 @@ public class FillAll extends GeneticAlgorithm {
                replaceB = replacementB.select(replacementSizeB,totalPopulation,generation);
 
             }
-
-            if(replaceA != null){
-                population.addAll(replaceA);
-            }
-            if(replaceB !=null){
-                population.addAll(replaceB);
-            }
+//            System.out.println("replaceASize:"+replaceA.size()+"replaceBSize:"+replaceB.size());
+            population.addAll(replaceA);
+            population.addAll(replaceB);
 
             generation++;
             generationList.add(((double)generation));
@@ -93,5 +81,7 @@ public class FillAll extends GeneticAlgorithm {
             updateCharts(population);
 
         }
+        Collections.sort(population);
+        System.out.println("MAX FITNESS: " + population.get(0));
     }
 }
