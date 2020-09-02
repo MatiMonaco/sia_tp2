@@ -14,21 +14,39 @@ public class Crossing {
         this.numOfGenomes = numOfGenomes;
     }
 
+    private static List<Genome> cloneGenomes(Character parent){
+        List<Genome> parentGenomes = parent.getGenomes();
+        List<Genome> newGenomes = new ArrayList<>();
+
+        try{
+            Height old = (Height) parentGenomes.get(0);
+            Height newHeight = (Height) old.clone();
+            newGenomes.add(newHeight);
+
+            for (int i = 1; i < parentGenomes.size(); i++) {
+                Equipment e = (Equipment) parentGenomes.get(i);
+                newGenomes.add((Equipment) e.clone());
+            }
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return newGenomes;
+    }
+
     public static List<Character> onePointCrossing(Character parent1, Character parent2){
 
         Random r = new Random();
         int p = r.nextInt(parent1.getGenomes().size() + 1);
-        System.out.printf("VALOR DE P: %d ------------------", p);
+//        System.out.printf("VALOR DE P: %d ------------------", p);
 
-        List<Genome> parentGens1 = parent1.getGenomes();
-        List<Genome> parentGens2 = parent2.getGenomes();
+        List<Genome> genomes1 = cloneGenomes(parent1);
+        List<Genome> genomes2 = cloneGenomes(parent2);
 
-        List<Genome> genomes1 = new ArrayList<>(parentGens1);
-        List<Genome> genomes2 = new ArrayList<>(parentGens2);
-
-        for (int i = p; i < parentGens1.size(); i++) {
-            genomes1.set(i, parentGens2.get(i));
-            genomes2.set(i, parentGens1.get(i));
+        for (int i = p; i < parent1.getGenomes().size(); i++) {
+            Genome aux = genomes1.get(i);
+            genomes1.set(i, genomes2.get(i));
+            genomes2.set(i, aux);
         }
 
         ArrayList<Character> toRet = new ArrayList<>();
@@ -41,24 +59,20 @@ public class Crossing {
         Random r = new Random();
         int p1 = r.nextInt(parent1.getGenomes().size() + 1);
         int p2 = r.nextInt(parent1.getGenomes().size() + 1);
-        System.out.printf("VALOR DE P1: %d ------------------", p1);
-        System.out.printf("VALOR DE P2: %d ------------------", p2);
 
-        List<Genome> parentGens1 = parent1.getGenomes();
-        List<Genome> parentGens2 = parent2.getGenomes();
-
-        List<Genome> genomes1 = new ArrayList<>(parentGens1);
-        List<Genome> genomes2 = new ArrayList<>(parentGens2);
+        List<Genome> genomes1 = cloneGenomes(parent1);
+        List<Genome> genomes2 = cloneGenomes(parent2);
 
         if (p1>p2){
             int aux=p1;
             p1=p2;
-            p2=p1;
+            p2=aux;
         }
 
-        for (int i = p1; i < parentGens1.size() && i < p2; i++) {
-            genomes1.set(i, parentGens2.get(i));
-            genomes2.set(i, parentGens1.get(i));
+        for (int i = p1; i < parent1.getGenomes().size() && i < p2; i++) {
+            Genome aux = genomes1.get(i);
+            genomes1.set(i, genomes2.get(i));
+            genomes2.set(i, aux);
         }
 
         ArrayList<Character> toRet = new ArrayList<>();
@@ -71,23 +85,20 @@ public class Crossing {
         Random r = new Random();
         int p = r.nextInt(parent1.getGenomes().size());
         int l = r.nextInt((int)Math.ceil((parent1.getGenomes().size() + 1.0)/2) + 1);
-        System.out.printf("VALOR DE P: %d ------------------", p);
-        System.out.printf("VALOR DE L: %d ------------------", l);
 
-        List<Genome> parentGens1 = parent1.getGenomes();
-        List<Genome> parentGens2 = parent2.getGenomes();
-
-        List<Genome> genomes1 = new ArrayList<>(parentGens1);
-        List<Genome> genomes2 = new ArrayList<>(parentGens2);
+        List<Genome> genomes1 = cloneGenomes(parent1);
+        List<Genome> genomes2 = cloneGenomes(parent2);
 
         for (int i = 0; i < l; i++) {
-            if (p+i < parentGens1.size()){
-                genomes1.set(p+i, parentGens2.get(p+i));
-                genomes2.set(p+i, parentGens1.get(p+i));
+            if (p+i < parent1.getGenomes().size()){
+                Genome aux = genomes1.get(p+i);
+                genomes1.set(p+i, genomes2.get(p+i));
+                genomes2.set(p+i, aux);
             }else{
-                int idx = p + i - parentGens1.size();
-                genomes1.set(idx, parentGens2.get(idx));
-                genomes2.set(idx, parentGens1.get(idx));
+                int idx = p + i - parent1.getGenomes().size();
+                Genome aux = genomes1.get(idx);
+                genomes1.set(idx, genomes2.get(idx));
+                genomes2.set(idx, aux);
             }
         }
 
@@ -101,22 +112,17 @@ public class Crossing {
         double P = 0.5;
         Random r = new Random();
 
-        List<Genome> parentGens1 = parent1.getGenomes();
-        List<Genome> parentGens2 = parent2.getGenomes();
-
-        List<Genome> genomes1 = new ArrayList<>(parentGens1);
-        List<Genome> genomes2 = new ArrayList<>(parentGens2);
+        List<Genome> genomes1 = cloneGenomes(parent1);
+        List<Genome> genomes2 = cloneGenomes(parent2);
 
         for (int i = 0; i < parent1.getGenomes().size(); i++) {
-            System.out.println("i:"+i);
             double prob = r.nextDouble();
-            System.out.printf("prob: %g --- idx: %d", prob, i);
             if (prob < P){
-                genomes1.set(i, parentGens2.get(i));
-                genomes2.set(i, parentGens1.get(i));
+                Genome aux = genomes1.get(i);
+                genomes1.set(i, genomes2.get(i));
+                genomes2.set(i, aux);
             }
         }
-        System.out.println("salgo del for");
         ArrayList<Character> toRet = new ArrayList<>();
         toRet.add(new Character(parent1.getType(), genomes1));
         toRet.add(new Character(parent1.getType(), genomes2));

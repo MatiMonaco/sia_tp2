@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Random;
 
-public class Equipment implements Genome{
+public class Equipment implements Genome, Cloneable{
 
     protected String name;
     protected String type;
@@ -79,6 +79,10 @@ public class Equipment implements Genome{
         return name;
     }
 
+    public String getType() {
+        return type;
+    }
+
     @Override
     public void mutate() {
         Equipment mutation = Database.getRandomEquipment(type);
@@ -88,5 +92,9 @@ public class Equipment implements Genome{
         this.health = mutation.getHealth();
         this.proficiency = mutation.getProficiency();
         this.resistance = mutation.getResistance();
+    }
+
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
     }
 }

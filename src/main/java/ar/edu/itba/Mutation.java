@@ -10,10 +10,10 @@ public class Mutation {
     public static Void genMutation(Character character, Double pm){
         Random r = new Random();
         int gen = r.nextInt(character.getGenomes().size()); // which gen
-        System.out.println("gen number: " + gen);
+//        System.out.println("gen number: " + gen);
 
         if(r.nextDouble() < pm){
-            System.out.println("mutating...");
+//            System.out.println("mutating...");
             character.mutateGen(gen);
         }
         return null;

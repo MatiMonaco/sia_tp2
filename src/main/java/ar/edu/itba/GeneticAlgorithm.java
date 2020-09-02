@@ -33,7 +33,9 @@ public abstract class GeneticAlgorithm {
     protected double pm,pa,pb;
 
 
-    public GeneticAlgorithm(int initialSize,int selectionsSize,Selection selectionA,Selection selectionB,Selection replacementA,Selection replacementB,int newGenerationSize,double pm,double pa,double pb,Convergence convergence,BiFunction<Character,Character,List<Character>> crossing,BiFunction<Character,Double,Void> mutate, CharacterType characterType){
+    public GeneticAlgorithm(int initialSize,int selectionsSize,Selection selectionA,Selection selectionB,
+                            Selection replacementA,Selection replacementB,int newGenerationSize,double pm,double pa,double pb,
+                            Convergence convergence,BiFunction<Character,Character,List<Character>> crossing,BiFunction<Character,Double,Void> mutate, CharacterType characterType){
         this.characterType = characterType;
         this.selectionsSize = selectionsSize;
         this.selectionA = selectionA;
