@@ -38,7 +38,7 @@ public class DeterministicTournament  extends Selection{
                 m++;
 
             }
-            System.out.println("winner:"+winner);
+
             selection.add(winner);
             k++;
         }

@@ -2,6 +2,7 @@ package ar.edu.itba;
 
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
+import ar.edu.itba.convergences.ContentConvergence;
 import ar.edu.itba.convergences.Convergence;
 import ar.edu.itba.convergences.GenerationQuantityConvergence;
 import ar.edu.itba.convergences.TimeConvergence;
@@ -11,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.knowm.xchart.style.markers.Cross;
 
+import javax.swing.text.AbstractDocument;
 import javax.xml.crypto.Data;
 import java.io.FileReader;
 import java.io.IOException;
@@ -61,9 +63,9 @@ public class Main {
         }
 
 
-        GeneticAlgorithm fillAll = new FillAll(100,50,new DeterministicTournament(4),new Elite(),new DeterministicTournament(4),new Elite(),
-                100,0.7,0.5,0.5, new TimeConvergence(30,System.currentTimeMillis()/1000),
-                Crossing::annularCrossing,Mutation::genMutation,CharacterType.WARRIOR);
+        GeneticAlgorithm fillAll = new FillAll(300,50,new Roulette(),new Universal(),new Roulette(),null,
+                100,0.1,0.5,1, new ContentConvergence(100,0.005),
+                Crossing::uniformCrossing,Mutation::complete,CharacterType.WARRIOR);
 
         fillAll.start();
     }

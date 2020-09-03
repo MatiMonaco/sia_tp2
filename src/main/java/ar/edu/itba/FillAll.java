@@ -23,7 +23,8 @@ public class FillAll extends GeneticAlgorithm {
     public void start() {
 
         List<Character> lastPopulation = new ArrayList<>(population);
-        while(!convergence.checkConvergence(lastPopulation,population,generation)){
+
+        while(!convergence.checkConvergence(population,generation)){
 //        while(generation<20){
 //            System.out.println("While");
             //selection
@@ -72,8 +73,13 @@ public class FillAll extends GeneticAlgorithm {
 
             }
 //            System.out.println("replaceASize:"+replaceA.size()+"replaceBSize:"+replaceB.size());
-            population.addAll(replaceA);
-            population.addAll(replaceB);
+            if(replaceA!= null){
+                population.addAll(replaceA);
+            }
+            if(replaceB!=null){
+                population.addAll(replaceB);
+            }
+
 
             generation++;
             generationList.add(((double)generation));

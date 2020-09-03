@@ -19,8 +19,9 @@ public class FillParent extends GeneticAlgorithm {
     @Override
     public void start() {
 
-        List<Character> lastPopulation = new ArrayList<>(population);
-        while(!convergence.checkConvergence(lastPopulation,population,generation)){
+
+        while(!convergence.checkConvergence(population,generation)){
+
             System.out.println("While");
 
             //selection
@@ -49,7 +50,7 @@ public class FillParent extends GeneticAlgorithm {
                 children.forEach(child->mutate.apply(child,pm));
                 newGeneration.addAll(children);
             }
-            lastPopulation = new ArrayList<>(population);
+
 
             //replacement
             if(selectionsSize > newGenerationSize){

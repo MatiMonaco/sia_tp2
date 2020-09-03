@@ -9,7 +9,10 @@ import org.knowm.xchart.style.colors.XChartSeriesColors;
 import org.knowm.xchart.style.lines.SeriesLines;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 
@@ -28,8 +31,8 @@ public class FitnessChartMatrix {
 
         XYSeries series = chart.addSeries(name, new double[]{0}, new double[]{0});
         series.setLineColor(XChartSeriesColors.BLUE);
-        series.setMarkerColor(Color.RED);
-        series.setMarker(SeriesMarkers.NONE);
+        series.setMarkerColor(Color.BLUE);
+        series.setMarker(SeriesMarkers.CROSS);
         series.setLineStyle(SeriesLines.DOT_DOT);
         charts.put(name,chart);
     }
@@ -38,12 +41,27 @@ public class FitnessChartMatrix {
         charts.get(name).updateXYSeries(name,xData,yData,null);
     }
 
-    public void displayChartMatrix(){
+    public JFrame displayChartMatrix(){
         List<XYChart> list = new ArrayList<>();
         charts.values().forEach(value-> list.add(value));
         System.out.println("Chart list:"+list);
         sw = new SwingWrapper<>(list);
-        sw.displayChartMatrix();
+        JFrame frame = sw.displayChartMatrix();
+        frame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                int key = e.getKeyCode();
+
+                if (key == KeyEvent.VK_R) {
+                  //run again
+                    System.out.println("R");
+                }
+
+            }
+        });
+        System.out.println(frame.getContentPane().getLayout());
+        return frame;
     }
 
     public void repaint(){

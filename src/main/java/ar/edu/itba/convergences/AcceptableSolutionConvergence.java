@@ -13,7 +13,7 @@ public class AcceptableSolutionConvergence extends Convergence {
         }
 
         @Override
-        public boolean checkConvergence(List<Character> lastPopulation, List<Character> population, int generation) {
+        public boolean checkConvergence( List<Character> population, int generation) {
             double maximumFitness = Character.getMaximumFitness(population);
             return maximumFitness >= acceptableSolution-delta || maximumFitness<= acceptableSolution+delta;
         }

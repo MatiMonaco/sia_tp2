@@ -33,11 +33,10 @@ public class ProbabilisticTournament extends Selection {
             Character aux1 = population.get(random1);
             Character aux2 = population.get(random2);
 
-            double randomThreshold = (size*Math.random());
+            double randomThreshold = Math.random();
 
             if(randomThreshold < threshold){
                 winner = aux1.getFitness() > aux2.getFitness() ? aux1 : aux2;
-
             }else{
                 winner = aux1.getFitness() < aux2.getFitness() ? aux1 : aux2;
             }

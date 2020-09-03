@@ -15,7 +15,7 @@ public class TimeConvergence extends Convergence
 
 
     @Override
-    public boolean checkConvergence(List<Character> lastPopulation, List<Character> population, int generation) {
+    public boolean checkConvergence(List<Character> population, int generation) {
         long now = System.currentTimeMillis()/1000;
 
         long diff = now - startTime;

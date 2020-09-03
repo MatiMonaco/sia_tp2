@@ -5,6 +5,7 @@ import ar.edu.itba.classes.CharacterType;
 import ar.edu.itba.convergences.Convergence;
 import ar.edu.itba.selections.Selection;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -31,7 +32,7 @@ public abstract class GeneticAlgorithm {
     protected int newGenerationSize;
     protected int initialSize;
     protected double pm,pa,pb;
-
+    private JFrame frame;
 
     public GeneticAlgorithm(int initialSize,int selectionsSize,Selection selectionA,Selection selectionB,
                             Selection replacementA,Selection replacementB,int newGenerationSize,double pm,double pa,double pb,
@@ -68,7 +69,7 @@ public abstract class GeneticAlgorithm {
         dataMaxFitness = new ArrayList<>();
         dataMinFitness = new ArrayList<>();
         generationList = new ArrayList<>();
-        fcm.displayChartMatrix();
+        this.frame =fcm.displayChartMatrix();
 
 
     }
