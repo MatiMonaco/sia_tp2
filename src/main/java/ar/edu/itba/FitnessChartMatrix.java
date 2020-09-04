@@ -44,7 +44,6 @@ public class FitnessChartMatrix {
     public JFrame displayChartMatrix(){
         List<XYChart> list = new ArrayList<>();
         charts.values().forEach(value-> list.add(value));
-        System.out.println("Chart list:"+list);
         sw = new SwingWrapper<>(list);
         JFrame frame = sw.displayChartMatrix();
         frame.addKeyListener(new KeyAdapter() {
@@ -60,7 +59,6 @@ public class FitnessChartMatrix {
 
             }
         });
-        System.out.println(frame.getContentPane().getLayout());
         return frame;
     }
 

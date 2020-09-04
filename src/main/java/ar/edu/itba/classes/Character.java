@@ -54,7 +54,6 @@ public class Character implements Comparable<Character> {
                 for(Height height:diffHeights){
                     if(height.equalsWithError(h,error)){
                         equals = true;
-                        System.out.println(h+" es igual a "+height );
                         break;
                     }
                 }
@@ -63,14 +62,13 @@ public class Character implements Comparable<Character> {
                 }
             }
             for(int j = 1; j < genomes.size();j++){
-                System.out.println("genomes:"+genomes);
+
                 Equipment eq = (Equipment) genomes.get(j);
                 if(!diffEquipment.isEmpty()){
                     boolean equals = false;
                     for(Equipment equipment:diffEquipment){
                         if(equipment.equalsWithError(eq,error)){
                             equals =true;
-                            System.out.println(eq+" es igual a "+equipment );
                             break;
                         }
                     }

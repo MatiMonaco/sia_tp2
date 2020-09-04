@@ -23,7 +23,7 @@ public class FillAll extends GeneticAlgorithm {
     @Override
     public void start() {
 
-        List<Character> lastPopulation = new ArrayList<>(population);
+
 
         while(!convergence.checkConvergence(population,generation)){
 //        while(generation<20){
@@ -55,7 +55,7 @@ public class FillAll extends GeneticAlgorithm {
             }
 
 
-            lastPopulation = new ArrayList<>(population);
+
 
             //replacement
             List<Character> totalPopulation = new ArrayList<>();
