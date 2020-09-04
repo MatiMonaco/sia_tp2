@@ -31,6 +31,10 @@ public class Height implements Genome, Cloneable {
         this.height = height;
     }
 
+    public boolean equalsWithError(Height h,double error){
+        return (Math.abs(height - h.height) <= error);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

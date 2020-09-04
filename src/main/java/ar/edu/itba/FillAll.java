@@ -14,8 +14,9 @@ import java.util.function.BiFunction;
 public class FillAll extends GeneticAlgorithm {
     public FillAll(int initialSize, int selectionSize, Selection selectionA, Selection selectionB, Selection replacementA, Selection replacementB,
                    int newGenerationSize, double pm, double pa, double pb, Convergence convergence,
-                   BiFunction<Character,Character,List<Character>> crossing, BiFunction<Character,Double,Void> mutate, CharacterType characterType) {
-        super(initialSize,selectionSize,selectionA,selectionB,replacementA,replacementB,newGenerationSize,pm,pa,pb,convergence,crossing,mutate,characterType);
+                   BiFunction<Character,Character,List<Character>> crossing,
+                   BiFunction<Character,Double,Void> mutate, CharacterType characterType,double error) {
+        super(initialSize,selectionSize,selectionA,selectionB,replacementA,replacementB,newGenerationSize,pm,pa,pb,convergence,crossing,mutate,characterType,error);
 
     }
 

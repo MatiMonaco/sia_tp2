@@ -24,16 +24,16 @@ public class FitnessChartMatrix {
         charts = new HashMap<>();
     }
 
-    public void addChart(String name,String xTitle,double xMin,String yTitle,double yMin){
+    public void addChart(String name,String xTitle,double xMin,String yTitle,double yMin,Color markerColor){
         XYChart chart = new XYChartBuilder().xAxisTitle(xTitle).yAxisTitle(yTitle).width(600).height(400).build();
         chart.getStyler().setYAxisMin((double) 0);
 
 
         XYSeries series = chart.addSeries(name, new double[]{0}, new double[]{0});
         series.setLineColor(XChartSeriesColors.BLUE);
-        series.setMarkerColor(Color.BLUE);
-        series.setMarker(SeriesMarkers.CROSS);
-        series.setLineStyle(SeriesLines.DOT_DOT);
+        series.setMarkerColor(markerColor);
+        series.setMarker(SeriesMarkers.CIRCLE);
+        series.setLineStyle(SeriesLines.NONE);
         charts.put(name,chart);
     }
 

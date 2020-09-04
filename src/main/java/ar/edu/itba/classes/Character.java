@@ -38,6 +38,54 @@ public class Character implements Comparable<Character> {
         return population.stream().min(Comparator.comparing(Character::getFitness)).get().getFitness();
     }
 
+    public static int getGeneticDiversity(List<Character> population,double error){
+
+        List<Height> diffHeights = new ArrayList<>();
+        List<Equipment> diffEquipment = new ArrayList<>();
+        int popSize = population.size();
+        for(int i = 0; i <popSize;i++){
+            Character c = population.get(i);
+            List<Genome> genomes = c.genomes;
+            if(diffHeights.isEmpty()){
+                diffHeights.add((Height) genomes.get(0));
+            }else{
+                Height h = (Height)genomes.get(0);
+                boolean equals = false;
+                for(Height height:diffHeights){
+                    if(height.equalsWithError(h,error)){
+                        equals = true;
+                        System.out.println(h+" es igual a "+height );
+                        break;
+                    }
+                }
+                if(!equals){
+                    diffHeights.add(h);
+                }
+            }
+            for(int j = 1; j < genomes.size();j++){
+                System.out.println("genomes:"+genomes);
+                Equipment eq = (Equipment) genomes.get(j);
+                if(!diffEquipment.isEmpty()){
+                    boolean equals = false;
+                    for(Equipment equipment:diffEquipment){
+                        if(equipment.equalsWithError(eq,error)){
+                            equals =true;
+                            System.out.println(eq+" es igual a "+equipment );
+                            break;
+                        }
+                    }
+                    if(!equals){
+                        diffEquipment.add(eq);
+                    }
+                }else{
+                    diffEquipment.add(eq);
+                }
+            }
+        }
+        return diffEquipment.size() + diffHeights.size();
+    }
+
+
 
 
     @Override

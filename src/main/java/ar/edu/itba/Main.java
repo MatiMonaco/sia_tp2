@@ -2,10 +2,7 @@ package ar.edu.itba;
 
 import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
-import ar.edu.itba.convergences.ContentConvergence;
-import ar.edu.itba.convergences.Convergence;
-import ar.edu.itba.convergences.GenerationQuantityConvergence;
-import ar.edu.itba.convergences.TimeConvergence;
+import ar.edu.itba.convergences.*;
 import ar.edu.itba.selections.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -62,10 +59,9 @@ public class Main {
             e.printStackTrace();
         }
 
-
-        GeneticAlgorithm fillAll = new FillAll(300,50,new Roulette(),new Universal(),new Roulette(),null,
-                100,0.1,0.5,1, new ContentConvergence(100,0.005),
-                Crossing::uniformCrossing,Mutation::complete,CharacterType.WARRIOR);
+        GeneticAlgorithm fillAll = new FillAll(20,10,new Roulette(),new Universal(),new ProbabilisticTournament(0.9),null,
+                30,0.1,0.5,1, new StructureConvergence(0.9,10,0.01),
+                Crossing::uniformCrossing,Mutation::multiGenMutation,CharacterType.WARRIOR,0.01);
 
         fillAll.start();
     }

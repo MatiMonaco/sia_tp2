@@ -10,7 +10,7 @@ public class Equipment implements Genome, Cloneable{
     protected String name;
     protected String type;
     protected double strength,agility,proficiency,resistance,health;
-
+    public  enum types {helmet,armor,weapon,gloves,boots}
     public Equipment(String type,String name, double strength, double agility, double proficiency, double resistance, double health) {
         this.name = name;
         this.strength = strength;
@@ -19,6 +19,15 @@ public class Equipment implements Genome, Cloneable{
         this.resistance = resistance;
         this.health = health;
     }
+
+    public boolean equalsWithError(Equipment eq,double error){
+        return (Math.abs(strength - eq.strength) <= error) &&
+                (Math.abs(agility - eq.agility) <= error) &&
+                (Math.abs(proficiency - eq.proficiency) <= error) &&
+                (Math.abs(resistance - eq.resistance) <= error) &&
+                (Math.abs(health - eq.health) <= error);
+    }
+
 
     @Override
     public boolean equals(Object o) {
