@@ -15,12 +15,12 @@ public class ProbabilisticTournament extends Selection {
 
     @Override
     public List<Character> select(int selectionSize, List<Character> population,int generation) {
-        System.out.println("inicio prob tournament");
+
         if(selectionSize == 0){
             return null;
         }
         if(threshold < 0.5 || threshold >1){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("El threshold del torneo debe ser un valor entre 0.5 y 1");
         }
         int k = 0;
         int size = population.size();

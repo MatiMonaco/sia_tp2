@@ -16,9 +16,11 @@ public class Universal extends Selection {
         if(selectionSize == 0){
             return null;
         }
+
         double totalFitness = population.stream().mapToDouble(Character::getFitness).sum();
         List<Double> relativeFitness =  population.stream().map(value -> value.getRelativeFitness(totalFitness)).collect(Collectors.toList());
         List<Double> accumulatedFitness = new ArrayList<>();
+
         for(int i = 0; i < population.size();i++){
             double acum = 0;
             for(int j = 0; j <= i;j++){
@@ -26,8 +28,10 @@ public class Universal extends Selection {
             }
             accumulatedFitness.add(acum);
         }
+
         int k = 0;
         List<Character> selection = new ArrayList<>();
+
         while(k < selectionSize){
             double random = (Math.random()+k)/selectionSize;
             for(int i = 0; i < accumulatedFitness.size()-1;i++){
@@ -44,7 +48,4 @@ public class Universal extends Selection {
 
         return  selection;
     }
-
-
-
 }

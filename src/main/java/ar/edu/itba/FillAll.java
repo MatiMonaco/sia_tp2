@@ -17,7 +17,6 @@ public class FillAll extends GeneticAlgorithm {
                    BiFunction<Character,Character,List<Character>> crossing,
                    BiFunction<Character,Double,Void> mutate, CharacterType characterType,double error) {
         super(initialSize,selectionSize,selectionA,selectionB,replacementA,replacementB,newGenerationSize,pm,pa,pb,convergence,crossing,mutate,characterType,error);
-
     }
 
     @Override
@@ -27,7 +26,7 @@ public class FillAll extends GeneticAlgorithm {
 
         while(!convergence.checkConvergence(population,generation)){
 //        while(generation<20){
-//            System.out.println("While");
+            System.out.println(generation);
             //selection
             int selectionSizeA = (int) (selectionsSize * pa);
             int selectionSizeB = selectionsSize-selectionSizeA;
@@ -89,6 +88,6 @@ public class FillAll extends GeneticAlgorithm {
 
         }
         Collections.sort(population);
-
+        System.out.println("MAX FITNESS: " + population.get(population.size()-1));
     }
 }

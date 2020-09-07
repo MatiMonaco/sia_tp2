@@ -45,12 +45,5 @@ public  abstract class Selection {
         }
 
         return  selection;
-
-
     }
-
-
-
-
-
 }

@@ -12,12 +12,11 @@ public class Elite extends Selection {
 
     @Override
     public List<Character> select(int selectionSize, List<Character> population,int generation) {
-//        System.out.println("inicio elite");
+
         if(selectionSize == 0){
             return null;
         }
         if(population.isEmpty()){
-//            System.out.println("Population is empty");
             return null;
         }
 
@@ -31,7 +30,6 @@ public class Elite extends Selection {
             selection.add(sortedList.get(i));
             k++;
         }
-//        System.out.println("return elite");
         return selection;
     }
 }

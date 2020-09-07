@@ -4,6 +4,7 @@ import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
 import ar.edu.itba.convergences.*;
 import ar.edu.itba.selections.*;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -18,9 +19,12 @@ import java.util.ArrayList;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class Main {
+
+
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -28,42 +32,250 @@ public class Main {
         String path = "./config.json";
         Database.load();
 
+        int initialPopulation, selectionSize, newGenerationSize;
+        double mutationChance;
+        BiFunction<Character,Character,List<Character>> crossingMethod = null;
+        BiFunction<Character,Double,Void> mutationMethod = null;
+        Selection selectionMethodA = null;
+        Selection selectionMethodB = null;
+        Selection replacementMethodA = null;
+        Selection replacementMethodB = null;
+        Convergence cutMethod = null;
+        CharacterType characterType = null;
+        GeneticAlgorithm ga = null;
+
         try (Reader reader = new FileReader(path)) {
 
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
             System.out.println(jsonObject);
 
-            String crossing = (String) jsonObject.get("crossing");
-            if(crossing == null){
-                System.out.println("Se debe especificar el cruce a utilizar");
-            }
-            String mutation = (String) jsonObject.get("mutation");
-            if(mutation == null){
-                System.out.println("Se debe especificar el mutación a utilizar");
-            }
-            String selection = (String) jsonObject.get("selection");
-            if(selection == null){
-                System.out.println("Se debe especificar la seleccion de padres y reemplazo de individuos a utilizar");
-            }
-            String implementation = (String) jsonObject.get("implementation");
-            if(implementation == null){
-                System.out.println("Se debe especificar la implementación a utilizar");
-            }
-            String convergence = (String) jsonObject.get("convergence");
-            if(convergence == null){
-                System.out.println("Se debe especificar el criterio de corte a utilizar");
+            String mutChance = (String) jsonObject.get("mutationChance");
+            if (mutChance == null)
+                throw new IllegalArgumentException("Se debe especificar la probabilidad de mutacion");
+            mutationChance = Double.parseDouble(mutChance);
+
+            String initPop = (String) jsonObject.get("initialPopulation");
+            if (initPop == null)
+                throw new IllegalArgumentException("Se debe especificar la poblacion inicial");
+            initialPopulation = Integer.parseInt(initPop);
+
+            String newGen = (String) jsonObject.get("newGenerationSize");
+            if (newGen == null)
+                throw new IllegalArgumentException("Se debe especificar el tamaño de la nueva generacion");
+            newGenerationSize = Integer.parseInt(newGen);
+
+            String selectSize = (String) jsonObject.get("selectionSize");
+            if (selectSize == null)
+                throw new IllegalArgumentException("Se debe especificar el tamaño de la seleccion");
+            selectionSize = Integer.parseInt(selectSize);
+
+            String type = (String) jsonObject.get("characterType");
+            if (type == null) {
+                throw new IllegalArgumentException("Se debe especificar el tipo de personaje");
+            }else{
+                switch (type){
+                    case "warrior":
+                        characterType = CharacterType.WARRIOR;
+                        break;
+                    case "archer":
+                        characterType = CharacterType.ARCHER;
+                        break;
+                    case "defender":
+                        characterType = CharacterType.DEFENDER;
+                        break;
+                    case "infiltrator":
+                        characterType = CharacterType.INFILTRATOR;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Tipo de personaje invalido");
+                }
             }
 
+            String crossing = (String) jsonObject.get("crossing");
+            if(crossing == null){
+                throw new IllegalArgumentException("Se debe especificar el cruce a utilizar");
+            }else{
+                switch (crossing){
+                    case "onePointCrossing":
+                        crossingMethod = Crossing::onePointCrossing;
+                        break;
+                    case "twoPointCrossing":
+                        crossingMethod = Crossing::twoPointCrossing;
+                        break;
+                    case "annularCrossing":
+                        crossingMethod = Crossing::annularCrossing;
+                        break;
+                    case "uniformCrossing":
+                        crossingMethod = Crossing::uniformCrossing;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Metodo de cruza invalido");
+                }
+            }
+
+            String mutation = (String) jsonObject.get("mutation");
+            if(mutation == null){
+                throw new IllegalArgumentException("Se debe especificar el mutación a utilizar");
+            }else{
+                switch (mutation){
+                    case "genMutation":
+                        mutationMethod = Mutation::genMutation;
+                        break;
+                    case "multiGenMutation":
+                        mutationMethod = Mutation::multiGenMutation;
+                        break;
+                    case "multiGenUniform":
+                        mutationMethod = Mutation::multiGenUniform;
+                        break;
+                    case "complete":
+                        mutationMethod = Mutation::complete;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Metodo de mutación invalido");
+                }
+            }
+
+            String selectionA = (String) jsonObject.get("selectionA");
+            if(selectionA == null){
+                throw new IllegalArgumentException("Se debe especificar el metodo de seleccion de padres");
+            }else{
+                selectionMethodA = getSelectionInstance(selectionA, jsonObject);
+            }
+
+            String selectionB = (String) jsonObject.get("selectionB");
+            if(selectionB == null){
+                throw new IllegalArgumentException("Se debe especificar el metodo de seleccion de padres");
+            }else{
+                selectionMethodB = getSelectionInstance(selectionB, jsonObject);
+            }
+
+            String replacementA = (String) jsonObject.get("replacementA");
+            if(replacementA == null){
+                throw new IllegalArgumentException("Se debe especificar el metodo de remplazo de padres");
+            }else{
+                replacementMethodA = getSelectionInstance(replacementA, jsonObject);
+            }
+
+            String replacementB = (String) jsonObject.get("replacementB");
+            if(replacementB == null){
+                throw new IllegalArgumentException("Se debe especificar el metodo de remplazo de padres");
+            }else{
+                replacementMethodB = getSelectionInstance(replacementB, jsonObject);
+            }
+
+            String cut = (String) jsonObject.get("cut");
+            if(cut == null){
+                throw new IllegalArgumentException("Se debe especificar el criterio de corte a utilizar");
+            }else{
+                String delta;
+                String generationLimit;
+                switch (cut){
+                    case "acceptableSolution":
+                        String expected = (String) jsonObject.get("expected");
+                        delta = (String) jsonObject.get("delta");
+                        if (expected == null || delta == null)
+                            throw new IllegalArgumentException("Se debe especificar la solucion esperada y el delta");
+                        cutMethod = new AcceptableSolutionConvergence(Double.parseDouble(expected), Double.parseDouble(delta));
+                        break;
+                    case "content":
+                        generationLimit = (String) jsonObject.get("generationLimit");
+                        delta = (String) jsonObject.get("delta");
+                        if (generationLimit == null || delta == null)
+                            throw new IllegalArgumentException("Se debe especificar la maxima generacion y el delta");
+                        cutMethod = new ContentConvergence(Integer.parseInt(generationLimit), Double.parseDouble(delta));
+                        break;
+                    case "generationQuantity":
+                        generationLimit = (String) jsonObject.get("generationLimit");
+                        if (generationLimit == null)
+                            throw new IllegalArgumentException("Se debe especificar la maxima generacion");
+                        cutMethod = new GenerationQuantityConvergence(Integer.parseInt(generationLimit));
+                        break;
+                    case "structure":
+                        String populationPercentage = (String) jsonObject.get("populationPercentage");
+                        generationLimit = (String) jsonObject.get("generationLimit");
+                        String error = (String) jsonObject.get("error");
+                        if (generationLimit == null || populationPercentage == null)
+                            throw new IllegalArgumentException("Se debe especificar el porcentaje de poblacion, la maxima generacion y el error");
+                        cutMethod = new StructureConvergence(Double.parseDouble(populationPercentage), Integer.parseInt(generationLimit), Double.parseDouble(error));
+                        break;
+                    case "time":
+                        String limit = (String) jsonObject.get("limit");
+                        String start = (String) jsonObject.get("start");
+                        if (limit == null || start == null)
+                            throw new IllegalArgumentException("Se debe especificar el porcentaje de poblacion, la maxima generacion y el error");
+                        cutMethod = new TimeConvergence(Long.parseLong(limit), Long.parseLong(start));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Metodo de corte invalido");
+                }
+            }
+
+            String implementation = (String) jsonObject.get("implementation");
+            if(implementation == null){
+                throw new IllegalArgumentException("Se debe especificar la implementación a utilizar");
+            }else{
+                switch (implementation){
+                    case "fillAll":
+                        ga = new FillAll(initialPopulation, selectionSize, selectionMethodA, selectionMethodB, replacementMethodA, replacementMethodB,
+                                newGenerationSize, mutationChance, 0.5, 1, cutMethod,
+                                crossingMethod, mutationMethod, characterType, 0.01);
+                        ga.start();
+                        break;
+                    case "fillParent":
+                        ga = new FillParent(initialPopulation, selectionSize, selectionMethodA, selectionMethodB, replacementMethodA, replacementMethodB,
+                                newGenerationSize, mutationChance, 0.5, 1, cutMethod,
+                                crossingMethod, mutationMethod, characterType, 0.01);
+                        ga.start();
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Metodo de implementacion invalido");
+                }
+            }
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 
-        GeneticAlgorithm fillAll = new FillAll(300,200,new Roulette(),new Universal(),new DeterministicTournament(2),null,
-                300,0.2,0.5,1, new StructureConvergence(0.9,100,0.001),
-                Crossing::uniformCrossing,Mutation::multiGenUniform,CharacterType.WARRIOR,0.5);
 
-        fillAll.start();
+
+//        GeneticAlgorithm fillAll = new FillAll(20,10,new Roulette(),new Universal(),new ProbabilisticTournament(0.9),null,
+//                30,0.1,0.5,1, new StructureConvergence(0.9,10,0.01),
+//                Crossing::uniformCrossing,Mutation::multiGenMutation,CharacterType.WARRIOR,0.01);
+//
+//        fillAll.start();
     }
 
+    private static Selection getSelectionInstance(String selection, JSONObject jsonObject){
+        switch (selection){
+            case "boltzmann":
+                String initialTemp = (String) jsonObject.get("initialTemp");
+                if(initialTemp == null)
+                    throw new IllegalArgumentException("Se debe especificar una temperatura inicial para el metodo de Boltzmann");
+
+                String finalTemp = (String) jsonObject.get("finalTemp");
+                if(finalTemp == null)
+                    throw new IllegalArgumentException("Se debe especificar una temperatura final para el metodo de Boltzmann");
+                return  new Boltzmann(Double.parseDouble(initialTemp), Double.parseDouble(finalTemp));
+            case "deterministicTournament":
+                String m = (String) jsonObject.get("m");
+                if (m == null)
+                    throw new IllegalArgumentException("Se debe especificar una cantidad para generar los duelos del torneo");
+                return new DeterministicTournament(Integer.parseInt(m));
+            case "elite":
+                return new Elite();
+            case "probabilisticTournament":
+                String tournamentThreshold = (String) jsonObject.get("tournamentThreshold");
+                if (tournamentThreshold == null)
+                    throw new IllegalArgumentException("Se debe especificar un threshold para el torneo probabilistico y este debe ser un valor entre 0.5 y 1");
+                return new ProbabilisticTournament(Double.parseDouble(tournamentThreshold));
+            case "ranking":
+                return new Ranking();
+            case "roulette":
+                return new Roulette();
+            case "universal":
+                return new Universal();
+            default:
+                throw new IllegalArgumentException("Metodo de seleccion invalido");
+        }
+    }
 }
