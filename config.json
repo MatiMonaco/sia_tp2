@@ -1,8 +1,19 @@
 {
-  "crossing":"one-point",
-  "mutation": "gen",
-  "selection": "elite",
-  "implementation": "fill-all",
-  "cut": "time"
-
+  "initialPopulation": "100",
+  "newGenerationSize": "50",
+  "selectionSize": "10",
+  "characterType": "warrior",
+  "crossing":"uniformCrossing",
+  "mutation": "multiGenMutation",
+  "mutationChance": "0.1",
+  "selectionA": "elite",
+  "selectionB": "roulette",
+  "m": "2",
+  "replacementA": "elite",
+  "replacementB": "roulette",
+  "implementation": "fillAll",
+  "cut": "generationQuantity",
+  "generationLimit": "50",
+  "expected": "25",
+  "delta": "0.5"
 }

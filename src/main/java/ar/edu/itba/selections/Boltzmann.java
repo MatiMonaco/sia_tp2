@@ -22,7 +22,6 @@ public class Boltzmann extends Selection{
 
     @Override
     public List<Character> select(int selectionSize, List<Character> population,int generation) {
-        System.out.println("inicio boltzman");
         if(selectionSize == 0){
             return null;
         }
@@ -37,7 +36,6 @@ public class Boltzmann extends Selection{
 
         System.out.println("fitness:"+fitness);
         decreaseTemperature(generation+1);
-        System.out.println("inicio boltzman");
         return customRoulette(selectionSize,sortedPop,fitness);
     }
 
