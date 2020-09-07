@@ -49,8 +49,8 @@ public class Main {
             if(implementation == null){
                 System.out.println("Se debe especificar la implementación a utilizar");
             }
-            String cut = (String) jsonObject.get("cut");
-            if(cut == null){
+            String convergence = (String) jsonObject.get("convergence");
+            if(convergence == null){
                 System.out.println("Se debe especificar el criterio de corte a utilizar");
             }
 
@@ -59,9 +59,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        GeneticAlgorithm fillAll = new FillAll(20,10,new Roulette(),new Universal(),new ProbabilisticTournament(0.9),null,
-                30,0.1,0.5,1, new StructureConvergence(0.9,10,0.01),
-                Crossing::uniformCrossing,Mutation::multiGenMutation,CharacterType.WARRIOR,0.01);
+        GeneticAlgorithm fillAll = new FillAll(300,200,new Roulette(),new Universal(),new DeterministicTournament(2),null,
+                300,0.2,0.5,1, new StructureConvergence(0.9,100,0.001),
+                Crossing::uniformCrossing,Mutation::multiGenUniform,CharacterType.WARRIOR,0.5);
 
         fillAll.start();
     }

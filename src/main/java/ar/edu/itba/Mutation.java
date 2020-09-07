@@ -22,11 +22,11 @@ public class Mutation {
     public static Void multiGenMutation(Character character, Double pm){
         Random r = new Random();
         int gens = r.nextInt(character.getGenomes().size()); // how many gens
-        System.out.println("mutating " + gens + " gens");
+
         for (int i = 0; i < gens; i++) {
             int g = r.nextInt(character.getGenomes().size());
             if (r.nextDouble() < pm){
-                System.out.println("Mutating gen " + g);
+
                 character.mutateGen(g);
             }
         }
@@ -38,7 +38,7 @@ public class Mutation {
 
         for(int i = 0; i < character.getGenomes().size(); i++){
             if (r.nextDouble() < pm){
-                System.out.println("mutating..." + i);
+
                 character.mutateGen(i);
             }
         }

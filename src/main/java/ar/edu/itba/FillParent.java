@@ -23,7 +23,7 @@ public class FillParent extends GeneticAlgorithm {
 
         while(!convergence.checkConvergence(population,generation)){
 
-            System.out.println("While");
+
 
             //selection
             int selectionSizeA = (int) (selectionsSize * pa);
@@ -89,7 +89,10 @@ public class FillParent extends GeneticAlgorithm {
                 }
                 population.addAll(newGeneration);
                 generation++;
-                System.out.println("generation: "+generation);
+                generationList.add(((double)generation));
+
+                updateCharts(population);
+
             }
         }
     }

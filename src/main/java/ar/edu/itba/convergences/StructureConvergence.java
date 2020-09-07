@@ -9,31 +9,36 @@ public class StructureConvergence extends Convergence{
 
     private double populationPercentage;
     private int generationLimit;
-    private List<Integer> geneticDiversityList;
+    private int generationCounter;
     private double error;
+
 
     public StructureConvergence(double populationPercentage, int generationLimit,double error) {
         this.populationPercentage = populationPercentage;
         this.generationLimit = generationLimit;
         this.error = error;
-        this.geneticDiversityList = new ArrayList<>();
+        this.generationCounter = 0;
+
     }
 
     @Override
     public boolean checkConvergence(List<Character> population, int generation) {
-        int gd1 =  Character.getGeneticDiversity(population,error);
-        if(geneticDiversityList.isEmpty()){
-            geneticDiversityList.add(gd1);
-        }else {
-            int gd2= geneticDiversityList.get(0);
-            if(gd1 == gd2){
-                geneticDiversityList.add(gd2);
-            }else{
-                geneticDiversityList = new ArrayList<>();
-            }
-        }
+        int gd =  Character.getGeneticDiversity(population,error);
 
-        if(geneticDiversityList.size()==generationLimit){
+        int totalGenomes = population.size() * 6;
+        int sameGenetic = totalGenomes - gd;
+        double percentage = (double)sameGenetic/totalGenomes;
+        if (percentage >= populationPercentage) {
+
+                generationCounter++;
+            }else{
+                generationCounter=0;
+            }
+
+
+
+
+        if  (generationCounter>=generationLimit){
             return true;
         }
         return false;

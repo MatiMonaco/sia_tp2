@@ -78,7 +78,7 @@ public abstract class GeneticAlgorithm {
     }
 
     protected void updateCharts(List<Character> population){
-        System.out.println("Updating charts");
+
         dataAvgFitness.add(Character.getAverageFitness(population));
         dataMinFitness.add(Character.getMinimumFitness(population));
         dataMaxFitness.add(Character.getMaximumFitness(population));

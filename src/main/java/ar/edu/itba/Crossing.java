@@ -128,7 +128,7 @@ public class Crossing {
         ArrayList<Character> toRet = new ArrayList<>();
         toRet.add(new Character(parent1.getType(), genomes1));
         toRet.add(new Character(parent1.getType(), genomes2));
-        System.out.println("1:"+toRet.get(0).getGenomes()+"\n2:"+toRet.get(1).getGenomes());
+     
         return toRet;
     }
 }

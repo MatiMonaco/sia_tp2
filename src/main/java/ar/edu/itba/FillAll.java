@@ -84,11 +84,11 @@ public class FillAll extends GeneticAlgorithm {
 
             generation++;
             generationList.add(((double)generation));
-            System.out.println("generation: "+generation);
+            System.out.println("generation:"+generation);
             updateCharts(population);
 
         }
         Collections.sort(population);
-        System.out.println("MAX FITNESS: " + population.get(0));
+
     }
 }
