@@ -122,65 +122,24 @@ public class Database {
             System.out.println("Loading weapons...");
                     settings.setRowProcessor(weaponsRp);
                     parser = new TsvParser(settings);
-                    URL res = Database.class.getClassLoader().getResource("weapons.tsv");
-                    File file = null;
-                    try {
-                        file = Paths.get(res.toURI()).toFile();
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                    String absolutePath = file.getAbsolutePath();
-            parser.parse(new FileReader(absolutePath));
+                    parser.parse(new FileReader("./resources/weapons.tsv"));
             System.out.println("Loading boots...");
                     settings.setRowProcessor(bootsRp);
                     parser = new TsvParser(settings);
-                    res = Database.class.getClassLoader().getResource("boots.tsv");
-                    file = null;
-                    try {
-                        file = Paths.get(res.toURI()).toFile();
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                    absolutePath = file.getAbsolutePath();
-                    parser.parse(new FileReader(absolutePath));
+
+                    parser.parse(new FileReader("./resources/boots.tsv"));
             System.out.println("Loading gloves...");
                     settings.setRowProcessor(glovesRp);
                     parser = new TsvParser(settings);
-                    res = Database.class.getClassLoader().getResource("gloves.tsv");
-                    file = null;
-                    try {
-                        file = Paths.get(res.toURI()).toFile();
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                    absolutePath = file.getAbsolutePath();
-                    parser.parse(new FileReader(absolutePath));
-
+                    parser.parse(new FileReader("./resources/helmets.tsv"));
             System.out.println("Loading helmets...");
                     settings.setRowProcessor(helmetsRp);
                     parser = new TsvParser(settings);
-                    res = Database.class.getClassLoader().getResource("helmets.tsv");
-                    file = null;
-                    try {
-                        file = Paths.get(res.toURI()).toFile();
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                    absolutePath = file.getAbsolutePath();
-                    parser.parse(new FileReader(absolutePath));
+                    parser.parse(new FileReader("./resources/gloves.tsv"));
             System.out.println("Loading armors...");
                     settings.setRowProcessor(armorRp);
                     parser = new TsvParser(settings);
-                    res = Database.class.getClassLoader().getResource("armor.tsv");
-                    file = null;
-                    try {
-                        file = Paths.get(res.toURI()).toFile();
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                    absolutePath = file.getAbsolutePath();
-                    parser.parse(new FileReader(absolutePath));
-
+                    parser.parse(new FileReader("./resources/armor.tsv"));
 
 
 
