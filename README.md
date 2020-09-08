@@ -49,7 +49,8 @@ Dentro de config.json se ingresan ingresan los parametros de ejecución:
 
 
 
-Ejemplo de configuració de ejecución:
+Ejemplo de configuración de ejecución:
+
 {
   "initialPopulation": "1000",
   "newGenerationSize": "50",
