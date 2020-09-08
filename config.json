@@ -7,13 +7,15 @@
   "mutation": "multiGenMutation",
   "mutationChance": "0.5",
   "selectionA": "elite",
+  "pa": "0.5",
   "selectionB": "roulette",
   "replacementA": "roulette",
+  "pb": "0.5",
   "replacementB": "roulette",
   "implementation": "fillAll",
-
   "cut": "content",
   "generationLimit": "50",
   "expected": "25",
-  "delta": "0.01"
+  "delta": "0.01",
+  "error": "0.0001"
 }

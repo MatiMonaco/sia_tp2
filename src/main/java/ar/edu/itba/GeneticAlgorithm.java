@@ -73,7 +73,7 @@ public abstract class GeneticAlgorithm {
            doubleFormatSb.append("#");
         }
         DecimalFormat df2 = new DecimalFormat(doubleFormatSb.toString());
-        sb.append("Generation: "+generationList.get(lastIndex)+'\n');
+        sb.append("Generation: "+ ((int)(double)generationList.get(lastIndex))+'\n');
         sb.append("Last Maximum Fitness: "+df2.format(dataMaxFitness.get(lastIndex))+'\n');
         sb.append("Best Fitness: "+df2.format(bestCharacter.getFitness())+'\n');
         Height height = (Height) bestCharacter.getGenomes().get(0);

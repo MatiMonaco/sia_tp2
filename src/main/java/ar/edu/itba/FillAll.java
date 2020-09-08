@@ -80,7 +80,7 @@ public class FillAll extends GeneticAlgorithm {
 
         }
         Collections.sort(population);
-
+        System.out.println("height:"+((Height)population.get(population.size()-1).getGenomes().get(0)).getHeight());
         showResults();
     }
 }

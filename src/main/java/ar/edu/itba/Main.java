@@ -26,6 +26,8 @@ public class Main {
 
         int initialPopulation, selectionSize, newGenerationSize;
         double mutationChance;
+        double pa,pb;
+        double error;
         BiFunction<Character,Character,List<Character>> crossingMethod;
         BiFunction<Character,Double,Void> mutationMethod;
         Selection selectionMethodA;
@@ -40,6 +42,22 @@ public class Main {
 
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
             System.out.println(jsonObject);
+
+            String err = (String) jsonObject.get("error");
+            if (err == null)
+                throw new IllegalArgumentException("Se debe especificar el error contemplado");
+            error = Double.parseDouble(err);
+
+            String paS = (String) jsonObject.get("pa");
+            if (paS == null)
+                throw new IllegalArgumentException("Se debe especificar el porcentaje sobre el cual usar el metodo de seleccion A");
+            pa = Double.parseDouble(paS);
+
+            String pbS = (String) jsonObject.get("pb");
+            if (pbS == null)
+                throw new IllegalArgumentException("Se debe especificar el porcentaje sobre el cual usar el metodo de reemplazo A");
+            pb = Double.parseDouble(paS);
+
 
             String mutChance = (String) jsonObject.get("mutationChance");
             if (mutChance == null)
@@ -185,10 +203,10 @@ public class Main {
                     case "structure":
                         String populationPercentage = (String) jsonObject.get("populationPercentage");
                         generationLimit = (String) jsonObject.get("generationLimit");
-                        String error = (String) jsonObject.get("error");
+
                         if (generationLimit == null || populationPercentage == null)
                             throw new IllegalArgumentException("Se debe especificar el porcentaje de poblacion, la maxima generacion y el error");
-                        cutMethod = new StructureConvergence(Double.parseDouble(populationPercentage), Integer.parseInt(generationLimit), Double.parseDouble(error));
+                        cutMethod = new StructureConvergence(Double.parseDouble(populationPercentage), Integer.parseInt(generationLimit), error);
                         break;
                     case "time":
                         String limit = (String) jsonObject.get("limit");
@@ -209,14 +227,14 @@ public class Main {
                 switch (implementation){
                     case "fillAll":
                         ga = new FillAll(initialPopulation, selectionSize, selectionMethodA, selectionMethodB, replacementMethodA, replacementMethodB,
-                                newGenerationSize, mutationChance, 0.5, 1, cutMethod,
-                                crossingMethod, mutationMethod, characterType, 0.01);
+                                newGenerationSize, mutationChance, pa, pb, cutMethod,
+                                crossingMethod, mutationMethod, characterType, error);
                         ga.start();
                         break;
                     case "fillParent":
                         ga = new FillParent(initialPopulation, selectionSize, selectionMethodA, selectionMethodB, replacementMethodA, replacementMethodB,
-                                newGenerationSize, mutationChance, 0.5, 1, cutMethod,
-                                crossingMethod, mutationMethod, characterType, 0.01);
+                                newGenerationSize, mutationChance, pa, pb, cutMethod,
+                                crossingMethod, mutationMethod, characterType, error);
                         ga.start();
                         break;
                     default:
