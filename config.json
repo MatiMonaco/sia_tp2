@@ -2,20 +2,38 @@
   "initialPopulation": "1000",
   "newGenerationSize": "50",
   "selectionSize": "10",
+
   "characterType": "warrior",
+
   "crossing": "uniformCrossing",
+
   "mutation": "multiGenMutation",
-  "mutationChance": "0.5",
-  "selectionA": "elite",
+  "mutationChance": "0.9",
+
   "pa": "0.5",
-  "selectionB": "roulette",
-  "replacementA": "roulette",
+  "selectionA": "elite",
+  "selectionB": "ranking",
+
   "pb": "0.5",
-  "replacementB": "roulette",
-  "implementation": "fillAll",
+  "replacementA": "roulette",
+  "replacementB": "elite",
+
   "cut": "content",
-  "generationLimit": "50",
-  "expected": "25",
-  "delta": "0.01",
-  "error": "0.0001"
+
+  "implementation": "fillAll",
+  "error": "0.0001",
+
+
+  "structure_generationLimit": "10",
+  "structure_populationPercentage": "80",
+
+  "generationQuantity_generationLimit": "1000",
+
+  "content_generationLimit": "50",
+
+  "acceptableSolution_expected": "25",
+  "acceptableSolution_delta": "0.01",
+
+  "time_limit":"15"
+
 }

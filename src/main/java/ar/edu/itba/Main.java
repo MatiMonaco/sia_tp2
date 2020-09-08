@@ -181,27 +181,27 @@ public class Main {
                 String generationLimit;
                 switch (cut){
                     case "acceptableSolution":
-                        String expected = (String) jsonObject.get("expected");
-                        delta = (String) jsonObject.get("delta");
+                        String expected = (String) jsonObject.get("acceptableSolution_expected");
+                        delta = (String) jsonObject.get("acceptableSolution_delta");
                         if (expected == null || delta == null)
                             throw new IllegalArgumentException("Se debe especificar la solucion esperada y el delta");
                         cutMethod = new AcceptableSolutionConvergence(Double.parseDouble(expected), Double.parseDouble(delta));
                         break;
                     case "content":
-                        generationLimit = (String) jsonObject.get("generationLimit");
-                        delta = (String) jsonObject.get("delta");
+                        generationLimit = (String) jsonObject.get("content_generationLimit");
+                        delta = (String) jsonObject.get("content_delta");
                         if (generationLimit == null || delta == null)
                             throw new IllegalArgumentException("Se debe especificar la maxima generacion y el delta");
                         cutMethod = new ContentConvergence(Integer.parseInt(generationLimit), Double.parseDouble(delta));
                         break;
                     case "generationQuantity":
-                        generationLimit = (String) jsonObject.get("generationLimit");
+                        generationLimit = (String) jsonObject.get("generationQuantity_generationLimit");
                         if (generationLimit == null)
                             throw new IllegalArgumentException("Se debe especificar la maxima generacion");
                         cutMethod = new GenerationQuantityConvergence(Integer.parseInt(generationLimit));
                         break;
                     case "structure":
-                        String populationPercentage = (String) jsonObject.get("populationPercentage");
+                        String populationPercentage = (String) jsonObject.get("structure_populationPercentage");
                         generationLimit = (String) jsonObject.get("generationLimit");
 
                         if (generationLimit == null || populationPercentage == null)
@@ -209,11 +209,10 @@ public class Main {
                         cutMethod = new StructureConvergence(Double.parseDouble(populationPercentage), Integer.parseInt(generationLimit), error);
                         break;
                     case "time":
-                        String limit = (String) jsonObject.get("limit");
-                        String start = (String) jsonObject.get("start");
-                        if (limit == null || start == null)
-                            throw new IllegalArgumentException("Se debe especificar el porcentaje de poblacion, la maxima generacion y el error");
-                        cutMethod = new TimeConvergence(Long.parseLong(limit), Long.parseLong(start));
+                        String limit = (String) jsonObject.get("time_limit");
+                        if (limit == null)
+                            throw new IllegalArgumentException("Se debe especificar el tiempo limite en segundos");
+                        cutMethod = new TimeConvergence(Long.parseLong(limit),System.currentTimeMillis());
                         break;
                     default:
                         throw new IllegalArgumentException("Metodo de corte invalido");
