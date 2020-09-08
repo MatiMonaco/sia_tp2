@@ -8,7 +8,7 @@
   "crossing": "uniformCrossing",
 
   "mutation": "multiGenMutation",
-  "mutationChance": "0.9",
+  "mutationChance": "0.1",
 
   "pa": "0.5",
   "selectionA": "boltzmann",
@@ -22,16 +22,16 @@
   "replacementA": "boltzmann",
   "replacementB": "elite",
 
-  "cut": "content",
-      "str_generationLimit": "10",
-      "str_populationPercentage": "80",
+  "cut": "acceptableSolution",
+      "str_generationLimit": "100",
+      "str_populationPercentage": "0.9",
 
       "gQ_generationLimit": "1000",
 
       "content_generationLimit": "50",
       "content_delta": "0.05",
 
-      "aS_expected": "25",
+      "aS_expected": "31",
       "aS_delta": "0.05",
 
       "time_limit":"15",
