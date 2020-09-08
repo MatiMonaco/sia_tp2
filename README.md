@@ -23,8 +23,8 @@ Dentro de config.json se ingresan ingresan los parametros de ejecución:
         en consecuencia se aplica al (1-pa)% de la población el método de selección B,
   - selectionA: método de selección A de padres ["boltzmann","deterministicTournament","probabilisticTournament","ranking",""elite","universal"],
   - selectionB: método de selección B de padres ["boltzmann","deterministicTournament","probabilisticTournament","ranking",""elite","universal"],
-    - botlzmann_initialTemp: temperatura inicial en la que inicia el método de Boltzmann,
-    - botlzmann_finalTemp: temperatura inicial en la que finaliza el método de Boltzmann,
+    - boltzmann_initialTemp: temperatura inicial en la que inicia el método de Boltzmann,
+    - boltzmann_finalTemp: temperatura inicial en la que finaliza el método de Boltzmann,
     - dT_m: cantidad de ciclos que se realizan en cada selección de ganadores del torneo determinístico,
     - pT_tournamentThreshold: límite utilizado en el torneo probabilístico,
     
