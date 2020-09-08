@@ -96,7 +96,7 @@ public class FillParent extends GeneticAlgorithm {
 
             }
             Collections.sort(population);
-            System.out.println("MAX FITNESS: " + population.get(population.size()-1));
+
         }
         showResults();
     }

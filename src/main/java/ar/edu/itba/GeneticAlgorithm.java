@@ -76,29 +76,29 @@ public abstract class GeneticAlgorithm {
         sb.append("Generation: "+generationList.get(lastIndex)+'\n');
         sb.append("Last Maximum Fitness: "+df2.format(dataMaxFitness.get(lastIndex))+'\n');
         sb.append("Best Fitness: "+df2.format(bestCharacter.getFitness())+'\n');
-        System.out.println("best character "+bestCharacter);
         Height height = (Height) bestCharacter.getGenomes().get(0);
         sb.append("Height: "+df2.format(height.getHeight())+'\n');
+        sb.append("Best Equipment: \n");
         Equipment aux = (Equipment) bestCharacter.getGenomes().get(1);
         String s1 = aux.getType().substring(0, 1).toUpperCase();
         String type = s1 + aux.getType().substring(1);
-        sb.append(type+": "+aux.getName()+'\n');
+        sb.append("\t - "+type+": "+aux.getName()+'\n');
         aux = (Equipment) bestCharacter.getGenomes().get(2);
         s1 = aux.getType().substring(0, 1).toUpperCase();
         type = s1 + aux.getType().substring(1);
-        sb.append(type+": "+aux.getName()+'\n');
+        sb.append("\t - "+type+": "+aux.getName()+'\n');
         aux = (Equipment) bestCharacter.getGenomes().get(3);
         s1 = aux.getType().substring(0, 1).toUpperCase();
         type = s1 + aux.getType().substring(1);
-        sb.append(type+": "+aux.getName()+'\n');
+        sb.append("\t - "+type+": "+aux.getName()+'\n');
         aux = (Equipment) bestCharacter.getGenomes().get(4);
         s1 = aux.getType().substring(0, 1).toUpperCase();
         type = s1 + aux.getType().substring(1);
-        sb.append(type+": "+aux.getName()+'\n');
+        sb.append("\t - "+type+": "+aux.getName()+'\n');
         aux = (Equipment) bestCharacter.getGenomes().get(5);
         s1 = aux.getType().substring(0, 1).toUpperCase();
         type = s1 + aux.getType().substring(1);
-        sb.append(type+": "+aux.getName()+'\n');
+        sb.append("\t - "+type+": "+aux.getName()+'\n');
 
 
 
@@ -124,13 +124,13 @@ public abstract class GeneticAlgorithm {
 
 
     protected void updateCharts(List<Character> population){
-        Character maximum =Character.getMaximumFitness(population);
+        Character maximum = population.get(population.size()-1);
         System.out.println(generationList.get(generationList.size()-1));
         System.out.println(maximum);
         bestCharacter = bestCharacter == null ? maximum: bestCharacter.getFitness() >= maximum.getFitness() ? bestCharacter: maximum;
         dataAvgFitness.add(Character.getAverageFitness(population));
         dataMinFitness.add(Character.getMinimumFitness(population));
-        dataMaxFitness.add(Character.getMaximumFitness(population).getFitness());
+        dataMaxFitness.add(Character.getMaximumFitness(population));
         dataGeneticDiv.add((double) Character.getGeneticDiversity(population,error));
 
         fcm.updateSeries("minFitness",generationList,dataMinFitness);
