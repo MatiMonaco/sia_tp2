@@ -4,23 +4,18 @@ import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
 import ar.edu.itba.convergences.*;
 import ar.edu.itba.selections.*;
-import com.sun.javaws.exceptions.InvalidArgumentException;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.knowm.xchart.style.markers.Cross;
 
-import javax.swing.text.AbstractDocument;
-import javax.xml.crypto.Data;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
+
 
 public class Main {
 

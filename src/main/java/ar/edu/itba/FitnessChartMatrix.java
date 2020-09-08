@@ -26,6 +26,7 @@ public class FitnessChartMatrix {
 
     public void addChart(String name,String xTitle,double xMin,String yTitle,double yMin,Color markerColor){
         XYChart chart = new XYChartBuilder().xAxisTitle(xTitle).yAxisTitle(yTitle).width(600).height(400).build();
+
         chart.getStyler().setYAxisMin((double) 0);
 
 
@@ -39,13 +40,17 @@ public class FitnessChartMatrix {
 
     public void updateSeries(String name, List<Double> xData,List<Double>yData){
         charts.get(name).updateXYSeries(name,xData,yData,null);
+
     }
 
     public JFrame displayChartMatrix(){
         List<XYChart> list = new ArrayList<>();
         charts.values().forEach(value-> list.add(value));
         sw = new SwingWrapper<>(list);
+
         JFrame frame = sw.displayChartMatrix();
+
+
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {

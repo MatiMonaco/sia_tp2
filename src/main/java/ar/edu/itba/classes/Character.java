@@ -28,8 +28,8 @@ public class Character implements Comparable<Character> {
         this.genomes = genomes;
     }
 
-    public static double getMaximumFitness(List<Character> population){
-        return population.stream().max(Comparator.comparing(Character::getFitness)).get().getFitness();
+    public static Character getMaximumFitness(List<Character> population){
+        return population.stream().max(Comparator.comparing(Character::getFitness)).get();
     }
     public static double getAverageFitness(List<Character> population){
         return population.stream().mapToDouble(Character::getFitness).sum()/population.size();

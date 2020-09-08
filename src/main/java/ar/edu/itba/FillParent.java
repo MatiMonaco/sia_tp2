@@ -95,5 +95,7 @@ public class FillParent extends GeneticAlgorithm {
 
             }
         }
+        showResults();
     }
+
 }

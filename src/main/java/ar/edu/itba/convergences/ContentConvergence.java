@@ -18,7 +18,7 @@ public class ContentConvergence extends Convergence{
 
     @Override
     public boolean checkConvergence(List<Character> population, int generation) {
-        double m1 =  Character.getMaximumFitness(population);
+        double m1 =  Character.getMaximumFitness(population).getFitness();
         if(maximumList.isEmpty()){
             maximumList.add(m1);
         }else {
