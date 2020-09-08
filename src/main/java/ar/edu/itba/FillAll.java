@@ -75,11 +75,11 @@ public class FillAll extends GeneticAlgorithm {
 
             generation++;
             generationList.add(((double)generation));
-
+            Collections.sort(population);
             updateCharts(population);
 
         }
-        Collections.sort(population);
+
         showResults();
     }
 }

@@ -91,11 +91,11 @@ public class FillParent extends GeneticAlgorithm {
                 population.addAll(newGeneration);
                 generation++;
                 generationList.add(((double)generation));
-
+                Collections.sort(population);
                 updateCharts(population);
 
             }
-            Collections.sort(population);
+
 
         }
         showResults();
