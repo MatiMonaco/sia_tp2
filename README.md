@@ -23,10 +23,10 @@ Dentro de config.json se ingresan ingresan los parametros de ejecución:
         en consecuencia se aplica al (1-pa)% de la población el método de selección B,
   - selectionA: método de selección A de padres ["boltzmann","deterministicTournament","probabilisticTournament","ranking",""elite","universal"],
   - selectionB: método de selección B de padres ["boltzmann","deterministicTournament","probabilisticTournament","ranking",""elite","universal"],
-    - botlzmann_initialTemp: temperatura inicial en la que inicia el método de Boltzmann,
-    - botlzmann_finalTemp: temperatura inicial en la que finaliza el método de Boltzmann,
-    - dT_m: cantidad de ciclos que se realizan en cada selección de ganadores del torneo,
-    - pT_tournamentThreshold: límite utilizado en el torneo probabilístico,
+    - boltzmann_initialTemp: temperatura inicial en la que inicia el método de Boltzmann,
+    - boltzmann_finalTemp: temperatura inicial en la que finaliza el método de Boltzmann,
+    - dT_m: cantidad de ciclos que se realizan en cada selección de ganadores del torneo determinístico,
+    - pT_threshold: límite utilizado en el torneo probabilístico,
     
   - pb: procentaje de la población sobre la cual se aplica el método de reemplazo A, y
         en consecuencia se aplica al (1-pb)% de la población el método de reemplazo B,
@@ -34,8 +34,8 @@ Dentro de config.json se ingresan ingresan los parametros de ejecución:
   - replacementB: método de reemplazo B de padres ["boltzmann","deterministicTournament","probabilisticTournament","ranking",""elite","universal"],
 
   - cut: método de corte ["acceptableSolution","content","generationQuantity","structure","time"],
-    - aS_expected: valor esperado del fitness,
-    - aS_delta: error contemplado en la comparación de fitness,
+    - aS_expected: valor esperado del fitness en el método de corte "acceptableSolution",
+    - aS_delta: error contemplado en la comparación de fitness en el método de corte "acceptableSolution",
     - content_generationLimit: límite de generaciones en el método de corte "content",
     - content_delta: error contemplado en la comparación de fitness en el método de corte "content",
     - gQ_generationLimit: límite de generaciones en el método de corte "generationLimit",
@@ -49,7 +49,8 @@ Dentro de config.json se ingresan ingresan los parametros de ejecución:
 
 
 
-Ejemplo de configuració de ejecución:
+Ejemplo de configuración de ejecución:
+
 {
   "initialPopulation": "1000",
   "newGenerationSize": "50",
