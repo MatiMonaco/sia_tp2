@@ -255,11 +255,11 @@ public class Main {
     private static Selection getSelectionInstance(String selection, JSONObject jsonObject){
         switch (selection){
             case "boltzmann":
-                String initialTemp = (String) jsonObject.get("botlzmann_initialTemp");
+                String initialTemp = (String) jsonObject.get("boltzmann_initialTemp");
                 if(initialTemp == null)
                     throw new IllegalArgumentException("Se debe especificar una temperatura inicial para el metodo de Boltzmann");
 
-                String finalTemp = (String) jsonObject.get("botlzmann_finalTemp");
+                String finalTemp = (String) jsonObject.get("boltzmann_finalTemp");
                 if(finalTemp == null)
                     throw new IllegalArgumentException("Se debe especificar una temperatura final para el metodo de Boltzmann");
                 return  new Boltzmann(Double.parseDouble(initialTemp), Double.parseDouble(finalTemp));
@@ -271,7 +271,7 @@ public class Main {
             case "elite":
                 return new Elite();
             case "probabilisticTournament":
-                String tournamentThreshold = (String) jsonObject.get("pT_tournamentThreshold");
+                String tournamentThreshold = (String) jsonObject.get("pT_threshold");
                 if (tournamentThreshold == null)
                     throw new IllegalArgumentException("Se debe especificar un threshold para el torneo probabilistico y este debe ser un valor entre 0.5 y 1");
                 return new ProbabilisticTournament(Double.parseDouble(tournamentThreshold));
