@@ -38,7 +38,7 @@ public class Crossing {
 
         Random r = new Random();
         int p = r.nextInt(parent1.getGenomes().size() + 1);
-//        System.out.printf("VALOR DE P: %d ------------------", p);
+
 
         List<Genome> genomes1 = cloneGenomes(parent1);
         List<Genome> genomes2 = cloneGenomes(parent2);

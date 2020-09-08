@@ -20,7 +20,6 @@ public class TimeConvergence extends Convergence
 
         long diff = now - startTime;
 
-        System.out.println("Now: "+now+ " StartTime: "+startTime+" diff: "+diff);
         return diff >= secondsLimit;
     }
 }

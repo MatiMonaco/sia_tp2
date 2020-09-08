@@ -123,10 +123,8 @@ public abstract class GeneticAlgorithm {
     }
 
 
-    protected void updateCharts(List<Character> population){
+    protected void updateCharts(List<Character> population) {
         Character maximum = population.get(population.size()-1);
-        System.out.println(generationList.get(generationList.size()-1));
-        System.out.println(maximum);
         bestCharacter = bestCharacter == null ? maximum: bestCharacter.getFitness() >= maximum.getFitness() ? bestCharacter: maximum;
         dataAvgFitness.add(Character.getAverageFitness(population));
         dataMinFitness.add(Character.getMinimumFitness(population));
@@ -138,6 +136,11 @@ public abstract class GeneticAlgorithm {
         fcm.updateSeries("avgFitness",generationList,dataAvgFitness);
         fcm.updateSeries("divGen",generationList,dataGeneticDiv);
         fcm.repaint();
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadInitialPopulation(int initialSize,CharacterType characterType){

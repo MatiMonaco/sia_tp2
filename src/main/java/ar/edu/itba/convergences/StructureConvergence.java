@@ -35,9 +35,6 @@ public class StructureConvergence extends Convergence{
                 generationCounter=0;
             }
 
-
-
-
         if  (generationCounter>=generationLimit){
             return true;
         }

@@ -59,7 +59,7 @@ public class FitnessChartMatrix {
 
                 if (key == KeyEvent.VK_R) {
                   //run again
-                    System.out.println("R");
+
                 }
 
             }
