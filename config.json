@@ -30,9 +30,10 @@
   "generationQuantity_generationLimit": "1000",
 
   "content_generationLimit": "50",
+  "content_delta": "0.05",
 
   "acceptableSolution_expected": "25",
-  "acceptableSolution_delta": "0.01",
+  "acceptableSolution_delta": "0.05",
 
   "time_limit":"15"
 
