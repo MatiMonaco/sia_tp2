@@ -3,12 +3,12 @@ Compilación:
 
 Al ser programado en Java, es necesario que descarguen como mínimo la SDK 8.
 Al ser un proyecto Maven, para compilar y crear el .jar se debe usar el comando 'mvn clean package', el cual crea el .jar dentro de la carpeta sia_tp2/target.
-En el caso de tener los archivos de configuracion config.json ya en esa carpeta, el comando anterior los borrará y deben crearse de nuevo.
+En el caso de tener los archivos de configuracion config.json y la carpeta resources con los archivos .tsv ya en esa carpeta, el comando anterior los borrará y deben crearse de nuevo.
 
 Ejecución:
 Para ejecutar el programa puede hacerle doble click al archivo .jar o dentro de la consola, colocandose en la carpeta sia_tp1/target e ingresar el comando: java -jar ./sia_tp2-1.0-SNAPSHOT.jar
 
-Dentro de la carpeta sia_tp2/target se encuentra el ejecutable sia_tp2-1.0-SNAPSHOT.jar, las dependencias, y config.json. 
+Dentro de la carpeta sia_tp2/target se encuentra el ejecutable sia_tp2-1.0-SNAPSHOT.jar, las dependencias, el config.json y la carpeta resources con los archivos .tsv. 
 
 Dentro de config.json se ingresan ingresan los parametros de ejecución:
   - initialPopulation: tamaño de población inicial,
