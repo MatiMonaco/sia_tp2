@@ -80,3 +80,35 @@ Ejemplo de configuración de ejecución:
   "content_generationLimit": "50",
   "content_delta": "0.05"
 }
+
+{
+  "initialPopulation": "1000",
+  "newGenerationSize": "50",
+  "selectionSize": "10",
+
+  "characterType": "infiltrator",
+
+  "crossing": "uniformCrossing",
+
+  "mutation": "multiGenMutation",
+  "mutationChance": "0.9",
+
+  "pa": "0.5",
+  "selectionA": "boltzmann",
+  "selectionB": "roulette",
+
+  "pb": "0.5",
+  "replacementA": "ranking",
+  "replacementB": "elite",
+
+  "cut": "structure",
+  "str_generationLimit":"50",
+  "str_populationPercentage":"0.8",
+
+  "implementation": "fillParent",
+  "error": "0.0001",
+  
+  "content_generationLimit": "50",
+  "content_delta": "0.05"
+}
+
