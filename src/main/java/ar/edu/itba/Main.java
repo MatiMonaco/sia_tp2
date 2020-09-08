@@ -181,8 +181,8 @@ public class Main {
                 String generationLimit;
                 switch (cut){
                     case "acceptableSolution":
-                        String expected = (String) jsonObject.get("acceptableSolution_expected");
-                        delta = (String) jsonObject.get("acceptableSolution_delta");
+                        String expected = (String) jsonObject.get("aS_expected");
+                        delta = (String) jsonObject.get("aS_delta");
                         if (expected == null || delta == null)
                             throw new IllegalArgumentException("Se debe especificar la solucion esperada y el delta");
                         cutMethod = new AcceptableSolutionConvergence(Double.parseDouble(expected), Double.parseDouble(delta));
@@ -195,14 +195,14 @@ public class Main {
                         cutMethod = new ContentConvergence(Integer.parseInt(generationLimit), Double.parseDouble(delta));
                         break;
                     case "generationQuantity":
-                        generationLimit = (String) jsonObject.get("generationQuantity_generationLimit");
+                        generationLimit = (String) jsonObject.get("gQ_generationLimit");
                         if (generationLimit == null)
                             throw new IllegalArgumentException("Se debe especificar la maxima generacion");
                         cutMethod = new GenerationQuantityConvergence(Integer.parseInt(generationLimit));
                         break;
                     case "structure":
-                        String populationPercentage = (String) jsonObject.get("structure_populationPercentage");
-                        generationLimit = (String) jsonObject.get("generationLimit");
+                        String populationPercentage = (String) jsonObject.get("str_populationPercentage");
+                        generationLimit = (String) jsonObject.get("str_generationLimit");
 
                         if (generationLimit == null || populationPercentage == null)
                             throw new IllegalArgumentException("Se debe especificar el porcentaje de poblacion, la maxima generacion y el error");
@@ -255,23 +255,23 @@ public class Main {
     private static Selection getSelectionInstance(String selection, JSONObject jsonObject){
         switch (selection){
             case "boltzmann":
-                String initialTemp = (String) jsonObject.get("initialTemp");
+                String initialTemp = (String) jsonObject.get("botlzmann_initialTemp");
                 if(initialTemp == null)
                     throw new IllegalArgumentException("Se debe especificar una temperatura inicial para el metodo de Boltzmann");
 
-                String finalTemp = (String) jsonObject.get("finalTemp");
+                String finalTemp = (String) jsonObject.get("botlzmann_finalTemp");
                 if(finalTemp == null)
                     throw new IllegalArgumentException("Se debe especificar una temperatura final para el metodo de Boltzmann");
                 return  new Boltzmann(Double.parseDouble(initialTemp), Double.parseDouble(finalTemp));
             case "deterministicTournament":
-                String m = (String) jsonObject.get("m");
+                String m = (String) jsonObject.get("dT_m");
                 if (m == null)
                     throw new IllegalArgumentException("Se debe especificar una cantidad para generar los duelos del torneo");
                 return new DeterministicTournament(Integer.parseInt(m));
             case "elite":
                 return new Elite();
             case "probabilisticTournament":
-                String tournamentThreshold = (String) jsonObject.get("tournamentThreshold");
+                String tournamentThreshold = (String) jsonObject.get("pT_tournamentThreshold");
                 if (tournamentThreshold == null)
                     throw new IllegalArgumentException("Se debe especificar un threshold para el torneo probabilistico y este debe ser un valor entre 0.5 y 1");
                 return new ProbabilisticTournament(Double.parseDouble(tournamentThreshold));
