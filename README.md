@@ -26,7 +26,7 @@ Dentro de config.json se ingresan ingresan los parametros de ejecución:
     - boltzmann_initialTemp: temperatura inicial en la que inicia el método de Boltzmann,
     - boltzmann_finalTemp: temperatura inicial en la que finaliza el método de Boltzmann,
     - dT_m: cantidad de ciclos que se realizan en cada selección de ganadores del torneo determinístico,
-    - pT_tournamentThreshold: límite utilizado en el torneo probabilístico,
+    - pT_threshold: límite utilizado en el torneo probabilístico,
     
   - pb: procentaje de la población sobre la cual se aplica el método de reemplazo A, y
         en consecuencia se aplica al (1-pb)% de la población el método de reemplazo B,
