@@ -6,6 +6,7 @@ Al ser un proyecto Maven, para compilar y crear el .jar se debe usar el comando 
 En el caso de tener los archivos de configuracion config.json ya en esa carpeta, el comando anterior los borrará y deben crearse de nuevo.
 
 Ejecución:
+Para ejecutar el programa puede hacerle doble click al archivo .jar o dentro de la consola, colocandose en la carpeta sia_tp1/target e ingresar el comando: java -jar ./sia_tp2-1.0-SNAPSHOT.jar
 
 Dentro de la carpeta sia_tp2/target se encuentra el ejecutable sia_tp2-1.0-SNAPSHOT.jar, las dependencias, y config.json. 
 
