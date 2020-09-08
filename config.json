@@ -6,14 +6,11 @@
   "crossing":"uniformCrossing",
   "mutation": "multiGenMutation",
   "mutationChance": "0.1",
-  "selectionA": "elite",
+  "selectionA": "roulette",
   "selectionB": "roulette",
-  "m": "2",
-  "replacementA": "elite",
+  "replacementA": "roulette",
   "replacementB": "roulette",
   "implementation": "fillAll",
   "cut": "generationQuantity",
-  "generationLimit": "50",
-  "expected": "25",
-  "delta": "0.5"
+  "generationLimit": "50"
 }

@@ -25,23 +25,19 @@ public class FillAll extends GeneticAlgorithm {
 
 
         while(!convergence.checkConvergence(population,generation)){
-//        while(generation<20){
-            System.out.println(generation);
+
             //selection
             int selectionSizeA = (int) (selectionsSize * pa);
             int selectionSizeB = selectionsSize-selectionSizeA;
-//            System.out.println("selectionSizeA: "+selectionSizeA+" selecitonSizeB: "+selectionSizeB);
             List<Character> selectA = selectionA.select(selectionSizeA,population,generation);
 
             List<Character> selectB = selectionB.select(selectionSizeB,population,generation);
-//            System.out.println("selectASize: "+selectA.size()+"selectBSize: "+selectB.size());
             List<Character> selections = new ArrayList<>();
             selections.addAll(selectA);
             selections.addAll(selectB);
 
             //crossing
             List<Character> newGeneration = new ArrayList<>();
-//            System.out.println("selectionSize" +selectionsSize+"selections size: "+selections.size());
             for(int i = 0; i < selectionsSize;i+=2){
                 int j = i+1;
                 if(j == selectionsSize){
@@ -52,9 +48,6 @@ public class FillAll extends GeneticAlgorithm {
                 children.forEach(child->mutate.apply(child,pm));
                 newGeneration.addAll(children);
             }
-
-
-
 
             //replacement
             List<Character> totalPopulation = new ArrayList<>();
@@ -72,7 +65,6 @@ public class FillAll extends GeneticAlgorithm {
                replaceB = replacementB.select(replacementSizeB,totalPopulation,generation);
 
             }
-//            System.out.println("replaceASize:"+replaceA.size()+"replaceBSize:"+replaceB.size());
             if(replaceA!= null){
                 population.addAll(replaceA);
             }
@@ -89,5 +81,6 @@ public class FillAll extends GeneticAlgorithm {
         }
         Collections.sort(population);
         System.out.println("MAX FITNESS: " + population.get(population.size()-1));
+        System.out.println("Height: " + population.get(population.size()-1).getGenomes().get(0));
     }
 }

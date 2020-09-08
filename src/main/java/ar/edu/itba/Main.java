@@ -4,23 +4,15 @@ import ar.edu.itba.classes.Character;
 import ar.edu.itba.classes.CharacterType;
 import ar.edu.itba.convergences.*;
 import ar.edu.itba.selections.*;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.knowm.xchart.style.markers.Cross;
-
-import javax.swing.text.AbstractDocument;
-import javax.xml.crypto.Data;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
+
 
 public class Main {
 
@@ -34,15 +26,15 @@ public class Main {
 
         int initialPopulation, selectionSize, newGenerationSize;
         double mutationChance;
-        BiFunction<Character,Character,List<Character>> crossingMethod = null;
-        BiFunction<Character,Double,Void> mutationMethod = null;
-        Selection selectionMethodA = null;
-        Selection selectionMethodB = null;
-        Selection replacementMethodA = null;
-        Selection replacementMethodB = null;
-        Convergence cutMethod = null;
-        CharacterType characterType = null;
-        GeneticAlgorithm ga = null;
+        BiFunction<Character,Character,List<Character>> crossingMethod;
+        BiFunction<Character,Double,Void> mutationMethod;
+        Selection selectionMethodA;
+        Selection selectionMethodB;
+        Selection replacementMethodA;
+        Selection replacementMethodB;
+        Convergence cutMethod;
+        CharacterType characterType ;
+        GeneticAlgorithm ga;
 
         try (Reader reader = new FileReader(path)) {
 
@@ -236,9 +228,7 @@ public class Main {
             e.printStackTrace();
         }
 
-
-
-//        GeneticAlgorithm fillAll = new FillAll(20,10,new Roulette(),new Universal(),new ProbabilisticTournament(0.9),null,
+//        GeneticAlgorithm fillAll = new FillParent(20,10,new Roulette(),new Universal(),new ProbabilisticTournament(0.9),null,
 //                30,0.1,0.5,1, new StructureConvergence(0.9,10,0.01),
 //                Crossing::uniformCrossing,Mutation::multiGenMutation,CharacterType.WARRIOR,0.01);
 //
