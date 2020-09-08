@@ -6,6 +6,7 @@ import ar.edu.itba.convergences.Convergence;
 import ar.edu.itba.selections.Selection;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -94,6 +95,8 @@ public class FillParent extends GeneticAlgorithm {
                 updateCharts(population);
 
             }
+            Collections.sort(population);
+            System.out.println("MAX FITNESS: " + population.get(population.size()-1));
         }
         showResults();
     }
